@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// react
+import React, { useState } from 'react'
+
+// modules
+
+// project files
+import './App.css'
+import { createTab } from './features/tabs/tabSlice'
+import { useSelector, useDispatch } from './hooks/useRedux'
+import Header from './features/tabs'
 
 function App() {
+  const dispatch = useDispatch()
+  const { order, list, activeTab } = useSelector((state) => state.tabs)
+  const bookmarks = useSelector((state) => state.bookmarks)
+  const categories = useSelector((state) => state.categories)
+  const tags = useSelector((state) => state.tags)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <main>
+        {list[order[activeTab]].categories.map((categoryId) => (
+          <div key={categoryId} className='card'>
+            <div className='card-header'>
+              <h4 className='card-title'>{categories[categoryId].title}</h4>
+            </div>
+            <div className='card-body'>
+              {categories[categoryId].bookmarks.map((bookmarkId) => (
+                <div key={bookmarkId} className='row'>
+                  <img
+                    src={`https://s2.googleusercontent.com/s2/favicons?domain=${bookmarks[bookmarkId].url}`}
+                    alt={`Favicon for ${bookmarks[bookmarkId].url}`}
+                  />
+                  <a
+                    href={bookmarks[bookmarkId].url}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {bookmarks[bookmarkId].title}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </main>
+    </>
+  )
 }
 
-export default App;
+export default App

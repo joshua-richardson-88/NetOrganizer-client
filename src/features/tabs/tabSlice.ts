@@ -14,6 +14,7 @@ import type {
 const initialState: Tabs = {
   order: [],
   list: {},
+  activeTab: 0,
 }
 
 const tabSlice = createSlice({
@@ -40,6 +41,9 @@ const tabSlice = createSlice({
     dropAll: (state) => {
       state.order = []
       state.list = {}
+    },
+    updateActiveTab: (state, action: PayloadAction<UpdateActiveTabPayload>) => {
+      state.activeTab = action.payload.index
     },
     updateCategoryOrder: (
       state,
@@ -101,6 +105,7 @@ export const {
   createTab,
   deleteTab,
   dropAll,
+  updateActiveTab,
   updateCategoryOrder,
   updateTabOrder,
   updateTabTitle,
@@ -108,6 +113,7 @@ export const {
 export interface Tabs {
   order: string[]
   list: IndexedTabs
+  activeTab: number // The currently displayed tab
 }
 interface IndexedTabs {
   [key: string]: Tab
@@ -124,6 +130,9 @@ interface CreateTabPayload extends Tab {
 }
 interface DeleteTabPayload {
   tabId: string
+}
+interface UpdateActiveTabPayload {
+  index: number
 }
 interface UpdateCategoryOrderPayload {
   categoryId: string

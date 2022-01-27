@@ -68,6 +68,7 @@ const defaultState: DefaultState = {
     },
   },
   tabs: {
+    activeTab: 0,
     list: {
       DGlFYz4bsDgM6xGlCpccj: {
         title: 'Tab 1',

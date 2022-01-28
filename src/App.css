@@ -92,6 +92,26 @@ main > .card {
   max-height: 66%;
   overflow: hidden;
 }
+main > .fab {
+  cursor: pointer;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  height: 3rem;
+  width: 3rem;
+  border: 4px solid hsl(207, 39%, 53%);
+  border-radius: 50%;
+  background: inherit;
+  color: hsl(207, 39%, 53%);
+  font-size: x-large;
+  font-weight: 300;
+  transition: 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+main > .fab:hover {
+  background-color: hsl(207, 39%, 53%);
+  color: #eee;
+}
 main > .card > .card-header {
   height: 2rem;
   padding: 0.5rem;

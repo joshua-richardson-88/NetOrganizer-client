@@ -1,20 +1,18 @@
 // react
-import React, { useState } from 'react'
+import React from 'react'
 
 // modules
 
 // project files
 import './App.css'
-import { createTab } from './features/tabs/tabSlice'
-import { useSelector, useDispatch } from './hooks/useRedux'
+import { useSelector } from './hooks/useRedux'
 import Header from './features/tabs'
 
 function App() {
-  const dispatch = useDispatch()
   const { order, list, activeTab } = useSelector((state) => state.tabs)
   const bookmarks = useSelector((state) => state.bookmarks)
   const categories = useSelector((state) => state.categories)
-  const tags = useSelector((state) => state.tags)
+  // const tags = useSelector((state) => state.tags)
 
   return (
     <>

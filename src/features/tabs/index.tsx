@@ -27,7 +27,7 @@ const Header: FC<Props> = () => {
         ))}
       </div>
       <button onClick={addTab}>+</button>
-      <button onClick={toggleEditMode}>
+      <button className={editMode ? 'active' : ''} onClick={toggleEditMode}>
         <EditIcon />
       </button>
     </header>

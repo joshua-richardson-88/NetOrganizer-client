@@ -21,7 +21,6 @@ header > .tablist {
   cursor: pointer;
 }
 .tablist > div > h2.editMode {
-  padding: 0.5rem;
   background-color: hsla(0, 0%, 100%, 0.3);
 }
 .tablist > div > h2.active {
@@ -53,16 +52,19 @@ header > button {
   font-weight: 300;
   text-align: center;
   transition: all 0.2s;
+  cursor: pointer;
 }
 header > button > svg {
   color: #eee;
   height: 16px;
   width: 16px;
 }
-header > button > svg:hover {
+header > button:hover > svg,
+header > button.active > svg {
   color: #121212;
 }
-header > button:hover {
+header > button:hover,
+header > button.active {
   background-color: #eee;
   color: #121212;
 }
@@ -87,6 +89,7 @@ main > .card {
   width: 15rem;
   flex-grow: 1;
   flex-basis: 33%;
+  max-height: 66%;
   overflow: hidden;
 }
 main > .card > .card-header {

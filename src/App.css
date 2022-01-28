@@ -53,6 +53,7 @@ header > button {
   text-align: center;
   transition: all 0.2s;
   cursor: pointer;
+  user-select: none;
 }
 header > button > svg {
   color: #eee;
@@ -86,9 +87,9 @@ main {
 main > .card {
   background-color: hsla(0, 0%, 100%, 0.05);
   border-radius: 0.5rem;
-  width: 15rem;
+  width: calc((100vw - 4rem) / 3);
   flex-grow: 1;
-  flex-basis: 33%;
+  flex-basis: 30%;
   max-height: 66%;
   overflow: hidden;
 }
@@ -107,6 +108,7 @@ main > .fab {
   font-size: x-large;
   font-weight: 300;
   transition: 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  user-select: none;
 }
 main > .fab:hover {
   background-color: hsl(207, 39%, 53%);
@@ -124,6 +126,7 @@ main > .card > .card-header > .card-title {
   margin: 0;
   padding: 0;
   color: #ddd;
+  user-select: none;
 }
 main > .card > .card-body {
   display: flex;

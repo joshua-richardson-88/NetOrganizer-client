@@ -1,15 +1,14 @@
 // react
 import { FC } from 'react'
-import { useSelector } from '../../../hooks/useRedux'
 
 // modules
-
 // project files
+import { useSelector } from '../../../hooks/useRedux'
+import Bookmark from '../../bookmarks'
 
 type Props = { id: string }
 const Category: FC<Props> = ({ id }) => {
   const { [id]: thisCategory } = useSelector((state) => state.categories)
-  const bookmarks = useSelector((state) => state.bookmarks)
 
   return (
     <div className='card'>
@@ -18,19 +17,7 @@ const Category: FC<Props> = ({ id }) => {
       </div>
       <div className='card-body'>
         {thisCategory.bookmarks.map((bookmarkId) => (
-          <div key={bookmarkId} className='row'>
-            <img
-              src={`https://s2.googleusercontent.com/s2/favicons?domain=${bookmarks[bookmarkId].url}`}
-              alt={`Favicon for ${bookmarks[bookmarkId].url}`}
-            />
-            <a
-              href={bookmarks[bookmarkId].url}
-              target='_blank'
-              rel='noreferrer'
-            >
-              {bookmarks[bookmarkId].title}
-            </a>
-          </div>
+          <Bookmark key={bookmarkId} id={bookmarkId} />
         ))}
       </div>
     </div>

@@ -23,7 +23,7 @@ const CardHeader: FC<Props> = ({ id, title }) => {
     >
       <CardTitle id={id} inEditMode={inEditMode} title={title} />
       {showEditButton && (
-        <button onClick={toggleEditMode}>
+        <button className='edit-button' onClick={toggleEditMode}>
           <EditIcon />
         </button>
       )}

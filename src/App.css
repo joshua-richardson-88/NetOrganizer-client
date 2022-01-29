@@ -138,11 +138,27 @@ main > .fab:hover {
   display: flex;
   justify-content: center;
 }
-.card-header > button {
+.card-header > .edit-button {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.card-header > .open-all-button {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   bottom: 0.5rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 .card-title.editMode {
   cursor: pointer;

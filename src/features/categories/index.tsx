@@ -18,9 +18,17 @@ const Content: FC<Props> = () => {
 
   return (
     <main>
-      {list[order[activeTab]].categories.map((categoryId) => (
-        <Category key={categoryId} id={categoryId} />
-      ))}
+      <div className='category-list'>
+        {list[order[activeTab]].categories.map((categoryId, index) => (
+          <Category
+            key={categoryId}
+            id={categoryId}
+            count={list[order[activeTab]].categories.length}
+            position={index}
+            tabTitle={list[order[activeTab]].title}
+          />
+        ))}
+      </div>
       <button className='fab' onClick={addCategory}>
         +
       </button>

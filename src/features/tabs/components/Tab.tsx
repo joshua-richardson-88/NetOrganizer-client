@@ -4,8 +4,8 @@ import { FC, useState } from 'react'
 // modules
 // project files
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
-import { updateActiveTab } from '../tabSlice'
-import TabInput from './TabInput'
+import { updateActiveTab, updateTabTitle } from '../tabSlice'
+import TitleInput from '../../../components/TitleInput'
 
 type Props = { id: string; inEditMode: boolean; position: number }
 const Tab: FC<Props> = ({ id, inEditMode, position }) => {
@@ -24,11 +24,18 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
     }
     dispatch(updateActiveTab({ index: position }))
   }
+  const updateTabTitleCb = (newTitle: string) => {
+    dispatch(updateTabTitle({ id, newTitle }))
+  }
 
   return (
     <div>
       {editTab ? (
-        <TabInput tabId={id} title={thisTab.title} setIsEditing={setEditTab} />
+        <TitleInput
+          title={thisTab.title}
+          setIsEditing={setEditTab}
+          updateCb={updateTabTitleCb}
+        />
       ) : (
         <h2
           className={

@@ -1,24 +1,20 @@
 // react
 import React, { FC, useRef, useState } from 'react'
-import useOutsideClick from '../../../hooks/useOutsideClick'
+import useOutsideClick from '../hooks/useOutsideClick'
 
 // modules
 // project files
-import { useDispatch } from '../../../hooks/useRedux'
-import { updateTabTitle } from '../tabSlice'
 
 type Props = {
   setIsEditing: (toggle: boolean) => void
-  tabId: string
   title: string
+  updateCb: (text: string) => void
 }
-const TabInput: FC<Props> = ({ setIsEditing, tabId, title }) => {
-  const dispatch = useDispatch()
+const TabInput: FC<Props> = ({ setIsEditing, title, updateCb }) => {
   const [inputText, setInputText] = useState(title)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useOutsideClick(inputRef, () => {
-    console.log('outside click!')
     setIsEditing(false)
   })
 
@@ -27,13 +23,11 @@ const TabInput: FC<Props> = ({ setIsEditing, tabId, title }) => {
   }
   const handleSubmit = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      sendUpdate()
+      updateCb(inputText)
       setIsEditing(false)
     }
     if (event.key === 'Esc' || event.key === 'Escape') setIsEditing(false)
   }
-  const sendUpdate = () =>
-    dispatch(updateTabTitle({ id: tabId, newTitle: inputText }))
 
   return (
     <input

@@ -122,10 +122,6 @@ interface BookmarkBase {
    */
   tags: string[]
   /**
-   * @description The text to display for this bookmark
-   */
-  title: string
-  /**
    * @description The URL this bookmark points to
    */
   url: string
@@ -136,6 +132,10 @@ export interface Bookmark extends BookmarkBase {
    *              this bookmark
    */
   activity: Activity[]
+  /**
+   * @description The text to display for this bookmark
+   */
+  title: string
 }
 export interface Activity {
   /**

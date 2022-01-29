@@ -63,11 +63,11 @@ const categorySlice = createSlice({
     },
     updateCategoryTitle: (
       state,
-      action: PayloadAction<UpdateCategoryPayload>
+      action: PayloadAction<UpdateCategoryTitlePayload>
     ) => {
-      const { categoryId, newTitle } = action.payload
+      const { id, newTitle } = action.payload
 
-      state[categoryId].title = titleReplacer(newTitle)
+      state[id].title = titleReplacer(newTitle)
     },
   },
   extraReducers: {
@@ -120,8 +120,8 @@ export interface DeleteCategoryPayload {
   categoryId: string
   tabId: string
 }
-interface UpdateCategoryPayload {
-  categoryId: string
+interface UpdateCategoryTitlePayload {
+  id: string
   newTitle: string
 }
 export interface UpdateBookmarkOrderPayload {

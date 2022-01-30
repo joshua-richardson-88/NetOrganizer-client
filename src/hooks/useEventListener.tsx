@@ -14,6 +14,7 @@ export default function useEventListener(
 
   useEffect(() => {
     const handler = (e: any) => callbackRef.current(e)
+    console.log('element: ', element)
     if (!element) return
     element.addEventListener(eventType, handler)
 

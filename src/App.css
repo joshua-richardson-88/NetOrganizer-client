@@ -111,7 +111,9 @@ main > .fab:hover {
 }
 
 .category-list > .card {
-  width: calc((100vw - 4rem) / 3);
+  min-width: calc((100vw - 4rem) / 5);
+  width: max-content;
+  max-width: calc((100vw - 4rem));
   min-height: 7rem;
   max-height: 85vh;
   display: flex;

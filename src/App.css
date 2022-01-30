@@ -224,14 +224,23 @@ main > .fab:hover {
   color: hsl(268, 98%, 17%);
 }
 
-.modal-overlay {
+.modal-wrapper {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: hsla(0, 0%, 0%, 0.6);
+  background-color: hsla(0, 0%, 0%, 0.3);
   z-index: 1000;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: blur(8px);
+  z-index: 1001;
 }
 .modal {
   position: fixed;
@@ -240,5 +249,43 @@ main > .fab:hover {
   transform: translate(-50%, -50%);
   background-color: #666;
   border-radius: 0.5rem;
+  width: 30vw;
+  height: 50vh;
+  z-index: 1001;
+}
+.modal > .header {
+  display: flex;
+  background-color: #232323;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  color: #eee;
+}
+.modal > form {
+  display: flex;
+  flex-flow: column nowrap;
   padding: 1rem;
+  gap: 1rem;
+}
+form > .row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+form > .row > label {
+  color: #eee;
+  width: 4rem;
+  text-align: right;
+}
+
+form > .row > input {
+  width: 16rem;
+  outline: none;
+  background-color: inherit;
+  border: none;
+  position: relative;
+  border-bottom: 2px solid hsla(0, 0%, 0%, 0.4);
+}
+form > .row > input:focus {
+  background-color: hsla(0, 0%, 100%, 0.05);
+  border-bottom: 2px solid hsl(207, 98%, 84%);
 }

@@ -6,14 +6,20 @@ import { createPortal } from 'react-dom'
 // project files
 import Form from './Form'
 
-const modalElement = document.getElementById('modal')
+// types
+import type { FormData } from './Form'
 
-type Props = { isOpen: boolean; onClose: () => void }
-const Portal: FC<Props> = ({ isOpen, onClose }) => {
+type Props = {
+  data: FormData
+  isOpen: boolean
+  onClose: (state: boolean) => void
+}
+const Portal: FC<Props> = ({ data, isOpen, onClose }) => {
+  const modalElement = document.getElementById('modal')
   if (!modalElement) return null
   if (!isOpen) return null
 
-  return createPortal(<Form />, modalElement)
+  return createPortal(<Form onClose={onClose} data={data} />, modalElement)
 }
 
 export default Portal

@@ -1,30 +1,20 @@
 // react
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 // modules
 // project files
-import { useDispatch, useSelector } from '../../../hooks/useRedux'
+import { useSelector } from '../../../hooks/useRedux'
 import Bookmark from '../../bookmarks'
-import { createBookmark } from '../../bookmarks/bookmarkSlice'
+import Portal from '../../bookmarks/components/Portal'
 import CardHeader from './CardHeader'
 
 type Props = { count: number; id: string; position: number; tabTitle: string }
 const Category: FC<Props> = ({ count, id, position, tabTitle }) => {
-  const dispatch = useDispatch()
   const { [id]: thisCategory } = useSelector((state) => state.categories)
 
-  const addBookmark = () => {
-    const newBookmark = {
-      categoryId: id,
-      categoryTitle: thisCategory.title,
-      tabTitle,
-      newTitle: 'New Bookmark',
-      notes: '',
-      tags: [],
-      url: '#',
-    }
-    dispatch(createBookmark(newBookmark))
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const addBookmark = () => setIsModalOpen(true)
   return (
     <div className='card'>
       <CardHeader id={id} title={thisCategory.title} />
@@ -35,6 +25,17 @@ const Category: FC<Props> = ({ count, id, position, tabTitle }) => {
           ))}
         </div>
         <button onClick={addBookmark}>Add Bookmark</button>
+        <Portal
+          isOpen={isModalOpen}
+          onClose={setIsModalOpen}
+          data={{
+            categoryId: id,
+            categoryTitle: thisCategory.title,
+            count,
+            position,
+            tabTitle,
+          }}
+        />
       </div>
     </div>
   )

@@ -9,13 +9,11 @@ import { createBookmark } from '../bookmarkSlice'
 export type FormData = {
   categoryId: string
   categoryTitle: string
-  count: number
-  position: number
   tabTitle: string
 }
 type Props = { data: FormData; onClose: (state: boolean) => void }
 const Form: FC<Props> = ({
-  data: { categoryId, categoryTitle, count, position, tabTitle },
+  data: { categoryId, categoryTitle, tabTitle },
   onClose,
 }) => {
   const dispatch = useDispatch()

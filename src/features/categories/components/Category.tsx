@@ -8,8 +8,8 @@ import Bookmark from '../../bookmarks'
 import Portal from '../../bookmarks/components/Portal'
 import CardHeader from './CardHeader'
 
-type Props = { count: number; id: string; position: number; tabTitle: string }
-const Category: FC<Props> = ({ count, id, position, tabTitle }) => {
+type Props = { id: string; tabTitle: string }
+const Category: FC<Props> = ({ id, tabTitle }) => {
   const { [id]: thisCategory } = useSelector((state) => state.categories)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,8 +31,6 @@ const Category: FC<Props> = ({ count, id, position, tabTitle }) => {
           data={{
             categoryId: id,
             categoryTitle: thisCategory.title,
-            count,
-            position,
             tabTitle,
           }}
         />

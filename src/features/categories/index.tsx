@@ -23,8 +23,6 @@ const Content: FC<Props> = () => {
           <Category
             key={categoryId}
             id={categoryId}
-            count={list[order[activeTab]].categories.length}
-            position={index}
             tabTitle={list[order[activeTab]].title}
           />
         ))}

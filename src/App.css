@@ -3,6 +3,10 @@
   display: flex;
   flex-flow: column nowrap;
 }
+.hide {
+  display: none;
+}
+
 header {
   display: flex;
   flex-flow: row nowrap;
@@ -187,8 +191,12 @@ main > .fab:hover {
 .bookmark-links > .row {
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
+}
+.bookmark-links > .row:hover > .bookmark-buttons {
+  display: flex;
 }
 .bookmark-links > .row > img,
 .bookmark-links > .row > svg {
@@ -198,30 +206,30 @@ main > .fab:hover {
 .bookmark-links > .row > svg {
   color: #bbb;
 }
-.bookmark-links > .row > a {
+.bookmark-links > .row > .bookmark-content > a {
   outline: none;
   text-decoration: none;
   width: fit-content;
   padding: 2px 1px 0;
   user-select: none;
 }
-.bookmark-links > .row > a:link {
+.bookmark-links > .row > .bookmark-content > a:link {
   color: hsl(207, 98%, 84%);
 }
-.bookmark-links > .row > a:visited {
+.bookmark-links > .row > .bookmark-content > a:visited {
   color: hsl(207, 69%, 72%);
 }
-.bookmark-links > .row > a:focus {
+.bookmark-links > .row > .bookmark-content > a:focus {
   padding: 0;
   border-bottom: 1px solid;
   background: hsl(268, 58%, 25%);
 }
-.bookmark-links > .row > a:hover {
+.bookmark-links > .row > .bookmark-content > a:hover {
   padding: 0;
   border-bottom: 1px solid;
   background: hsl(268, 98%, 17%);
 }
-.bookmark-links > .row > a:active {
+.bookmark-links > .row > .bookmark-content > a:active {
   background: hsl(207, 98%, 84%);
   color: hsl(268, 98%, 17%);
 }

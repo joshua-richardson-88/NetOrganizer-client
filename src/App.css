@@ -223,3 +223,22 @@ main > .fab:hover {
   background: hsl(207, 98%, 84%);
   color: hsl(268, 98%, 17%);
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  z-index: 1000;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #666;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}

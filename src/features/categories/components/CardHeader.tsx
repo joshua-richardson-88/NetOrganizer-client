@@ -44,19 +44,22 @@ const CardHeader: FC<Props> = ({ id, tabId, title }) => {
       <CardTitle id={id} inEditMode={inEditMode} title={title} />
       {showEditButton && (
         <>
-          <button className='edit-button' onClick={toggleEditMode}>
+          <button
+            className={inEditMode ? 'edit-button active' : 'edit-button'}
+            onClick={toggleEditMode}
+          >
             <EditIcon />
           </button>
           {inEditMode ? (
-            <button className='button-right' onClick={openAllLinks}>
-              <OpenAllLinks />
-            </button>
-          ) : (
             <button
               className='button-right'
               onClick={handleDeleteCategoryClick}
             >
               <DeleteIcon />
+            </button>
+          ) : (
+            <button className='button-right' onClick={openAllLinks}>
+              <OpenAllLinks />
             </button>
           )}
         </>

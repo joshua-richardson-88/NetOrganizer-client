@@ -240,7 +240,6 @@ main > .fab:hover {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: hsla(0, 0%, 0%, 0.3);
   z-index: 1000;
 }
 .modal-backdrop {
@@ -249,20 +248,24 @@ main > .fab:hover {
   right: 0;
   bottom: 0;
   left: 0;
-  filter: blur(8px);
   z-index: 1001;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  backdrop-filter: blur(8px);
+  filter: blur(30px);
 }
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #666;
-  border-radius: 0.5rem;
   min-width: fit-content;
   width: 30vw;
-  height: 50vh;
+  height: 40vh;
   z-index: 1001;
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 0.5rem;
+  background-color: #666;
 }
 .modal > .header {
   display: flex;
@@ -273,23 +276,27 @@ main > .fab:hover {
   color: #eee;
 }
 .modal > form {
+  flex: 1;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: space-between;
   padding: 1rem;
   gap: 1rem;
 }
-form > .row {
+form > .form-body {
+  flex: 1;
+}
+form > .form-body > .row {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
-form > .row > label {
+form > .form-body > .row > label {
   color: #eee;
   width: 4rem;
   text-align: right;
 }
-
-form > .row > input {
+form > .form-body > .row > input {
   width: 16rem;
   outline: none;
   background-color: inherit;
@@ -298,7 +305,7 @@ form > .row > input {
   border-bottom: 2px solid hsla(0, 0%, 0%, 0.4);
   color: #eee;
 }
-form > .row > input:focus {
+form > .form-body > .row > input:focus {
   background-color: hsla(0, 0%, 100%, 0.05);
   border-bottom: 2px solid hsl(207, 98%, 84%);
 }

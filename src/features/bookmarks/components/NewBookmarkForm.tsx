@@ -69,35 +69,37 @@ const NewBookmarkForm: FC<Props> = ({
           <button onClick={handleClose}>X</button>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className='row'>
-            <label htmlFor='title'>Title</label>
-            <input
-              id='title'
-              type='text'
-              autoComplete='off'
-              value={title}
-              onChange={handleUpdate}
-            />
-          </div>
-          <div className='row'>
-            <label htmlFor='url'>Link URL</label>
-            <input
-              id='url'
-              type='text'
-              autoComplete='off'
-              value={url}
-              onChange={handleUpdate}
-            />
-          </div>
-          <div className='row'>
-            <label htmlFor='notes'>Notes</label>
-            <input
-              id='notes'
-              type='text'
-              autoComplete='off'
-              value={notes}
-              onChange={handleUpdate}
-            />
+          <div className='form-body'>
+            <div className='row'>
+              <label htmlFor='title'>Title</label>
+              <input
+                id='title'
+                type='text'
+                autoComplete='off'
+                value={title}
+                onChange={handleUpdate}
+              />
+            </div>
+            <div className='row'>
+              <label htmlFor='url'>Link URL</label>
+              <input
+                id='url'
+                type='text'
+                autoComplete='off'
+                value={url}
+                onChange={handleUpdate}
+              />
+            </div>
+            <div className='row'>
+              <label htmlFor='notes'>Notes</label>
+              <input
+                id='notes'
+                type='text'
+                autoComplete='off'
+                value={notes}
+                onChange={handleUpdate}
+              />
+            </div>
           </div>
           <button type='submit'>Save</button>
         </form>

@@ -285,6 +285,9 @@ main > .fab:hover {
 }
 form > .form-body {
   flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
 }
 form > .form-body > .row {
   display: flex;

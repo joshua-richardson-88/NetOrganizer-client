@@ -3,16 +3,19 @@ import { FC, useState } from 'react'
 
 // modules
 // project files
-import { useSelector } from '../../hooks/useRedux'
+import { useDispatch, useSelector } from '../../hooks/useRedux'
 import BookmarkIcon from './components/BookmarkIcon'
 import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../assets/deleteIcon.svg'
 import Portal from './components/Portal'
+import { deleteBookmark } from './bookmarkSlice'
 
 type Props = {
+  categoryId: string
   id: string
 }
-const Bookmark: FC<Props> = ({ id }) => {
+const Bookmark: FC<Props> = ({ categoryId, id }) => {
+  const dispatch = useDispatch()
   const { [id]: thisBookmark } = useSelector((state) => state.bookmarks)
 
   const [hovered, setHovered] = useState(false)
@@ -21,6 +24,8 @@ const Bookmark: FC<Props> = ({ id }) => {
   const handleMouseOver = () => setHovered(true)
   const handleMouseLeave = () => setHovered(false)
   const handleEditClick = () => setFormOpen(true)
+  const handleDeleteClick = () =>
+    dispatch(deleteBookmark({ bookmarkId: id, categoryId }))
 
   return (
     <div
@@ -41,7 +46,7 @@ const Bookmark: FC<Props> = ({ id }) => {
           </button>
         )}
         {hovered && (
-          <button>
+          <button onClick={handleDeleteClick}>
             <DeleteIcon />
           </button>
         )}

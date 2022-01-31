@@ -21,7 +21,7 @@ const Category: FC<Props> = ({ id, tabTitle }) => {
       <div className='card-body'>
         <div className='bookmark-links'>
           {thisCategory.bookmarks.map((bookmarkId) => (
-            <Bookmark id={bookmarkId} key={bookmarkId} />
+            <Bookmark categoryId={id} id={bookmarkId} key={bookmarkId} />
           ))}
         </div>
         <button onClick={addBookmark}>Add Bookmark</button>

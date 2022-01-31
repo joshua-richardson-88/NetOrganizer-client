@@ -34,9 +34,9 @@ const tabSlice = createSlice({
       },
     },
     deleteTab: (state, action: PayloadAction<DeleteTabPayload>) => {
-      const { tabId } = action.payload
-      state.order = state.order.filter((id) => id !== tabId)
-      delete state.list[tabId]
+      const { id } = action.payload
+      state.order = state.order.filter((tabId) => id !== tabId)
+      delete state.list[id]
     },
     dropAll: (state) => {
       state.order = []
@@ -128,8 +128,8 @@ interface CreateTabInput {
 interface CreateTabPayload extends Tab {
   id: string
 }
-interface DeleteTabPayload {
-  tabId: string
+export interface DeleteTabPayload {
+  id: string
 }
 interface UpdateActiveTabPayload {
   index: number

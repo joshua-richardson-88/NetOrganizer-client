@@ -54,6 +54,13 @@ main {
   background-color: #444;
   padding: 1rem;
 }
+main > .blank-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark-0);
+  height: 100%;
+}
 main > .fab {
   cursor: pointer;
   position: absolute;

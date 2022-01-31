@@ -16,6 +16,13 @@ const Content: FC<Props> = () => {
     dispatch(createCategory(newCategory))
   }
 
+  if (activeTab < 0)
+    return (
+      <main>
+        <h1 className='blank-category'>Select a Tab to begin</h1>
+      </main>
+    )
+
   return (
     <main>
       <div className='category-list'>

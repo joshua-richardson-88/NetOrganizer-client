@@ -6,6 +6,9 @@ import { FC, useState } from 'react'
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
 import { updateActiveTab, updateTabTitle } from '../tabSlice'
 import TitleInput from '../../../components/TitleInput'
+import { deleteBookmark } from '../../bookmarks/bookmarkSlice'
+import { deleteCategory } from '../../categories/categorySlice'
+import { deleteTab } from '../tabSlice'
 
 type Props = { id: string; inEditMode: boolean; position: number }
 const Tab: FC<Props> = ({ id, inEditMode, position }) => {
@@ -14,6 +17,7 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
     activeTab,
     list: { [id]: thisTab },
   } = useSelector((state) => state.tabs)
+  const categories = useSelector((state) => state.categories)
 
   const [editTab, setEditTab] = useState(false)
 
@@ -27,9 +31,25 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
   const updateTabTitleCb = (newTitle: string) => {
     dispatch(updateTabTitle({ id, newTitle }))
   }
+  const handleDeleteTab = () => {
+    if (activeTab === position) {
+      dispatch(updateActiveTab({ index: -1 }))
+    }
+    thisTab.categories.forEach((categoryId) => {
+      categories[categoryId].bookmarks.forEach((bookmarkId) => {
+        dispatch(deleteBookmark({ bookmarkId, categoryId }))
+      })
+      dispatch(deleteCategory({ categoryId, tabId: id }))
+    })
+    dispatch(deleteTab({ id }))
+  }
 
   return (
-    <div>
+    <div
+      className={
+        inEditMode ? 'edit-mode' : activeTab === position ? 'active' : ''
+      }
+    >
       {editTab ? (
         <TitleInput
           title={thisTab.title}
@@ -37,14 +57,12 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
           updateCb={updateTabTitleCb}
         />
       ) : (
-        <h2
-          className={
-            inEditMode ? 'edit-mode' : activeTab === position ? 'active' : ''
-          }
-          onClick={handleClick}
-        >
-          {thisTab.title}
-        </h2>
+        <h2 onClick={handleClick}>{thisTab.title}</h2>
+      )}
+      {inEditMode && (
+        <span className='delete-tab' onClick={handleDeleteTab}>
+          x
+        </span>
       )}
     </div>
   )

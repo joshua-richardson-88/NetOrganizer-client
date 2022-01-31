@@ -3,10 +3,6 @@
   display: flex;
   flex-flow: column nowrap;
 }
-.hide {
-  display: none;
-}
-
 header {
   display: flex;
   flex-flow: row nowrap;
@@ -47,6 +43,7 @@ header > .tablist {
   color: #444;
 }
 button {
+  height: max-content;
   display: inline-block;
   margin: 0 0.05em 0.05em 0;
   padding: 0em 0.6em;
@@ -262,6 +259,7 @@ main > .fab:hover {
   transform: translate(-50%, -50%);
   background-color: #666;
   border-radius: 0.5rem;
+  min-width: fit-content;
   width: 30vw;
   height: 50vh;
   z-index: 1001;
@@ -270,6 +268,7 @@ main > .fab:hover {
   display: flex;
   background-color: #232323;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
   color: #eee;
 }

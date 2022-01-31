@@ -65,7 +65,7 @@ const NewBookmarkForm: FC<Props> = ({
       <div className='modal-backdrop' />
       <div className='modal'>
         <div className='header'>
-          <h4>Add A New Bookmark</h4>
+          <h4>New Bookmark</h4>
           <button onClick={handleClose}>X</button>
         </div>
         <form onSubmit={handleSubmit}>

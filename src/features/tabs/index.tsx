@@ -1,5 +1,5 @@
 // react
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 
 // modules
 // project files
@@ -9,6 +9,7 @@ import { createTab } from './tabSlice'
 import Tab from './components/Tab'
 import './index.css'
 import useToggle from '../../hooks/useToggle'
+import useOutsideClick from '../../hooks/useOutsideClick'
 
 // types
 
@@ -16,16 +17,26 @@ type Props = {}
 const Header: FC<Props> = () => {
   const dispatch = useDispatch()
   const { order } = useSelector((state) => state.tabs)
+
+  const menuRef = useRef(null)
   const [isEditMode, toggleEditMode] = useToggle(false)
   const [isMenuOpen, toggleMenuOpen] = useToggle(false)
 
-  const handleEditModeClick = () => toggleEditMode()
   const handleMenuClick = () => toggleMenuOpen()
-  const addTab = () => dispatch(createTab({ tabTitle: 'New Tab' }))
+  const handleEditModeClick = () => {
+    toggleEditMode()
+    toggleMenuOpen()
+  }
+  const addTab = () => {
+    dispatch(createTab({ tabTitle: 'New Tab' }))
+    toggleMenuOpen()
+  }
+
+  useOutsideClick(menuRef, () => toggleMenuOpen(false))
 
   return (
     <header>
-      <div className='menu-container'>
+      <div className='menu-container' ref={menuRef}>
         <button className='menu-button' onClick={handleMenuClick}>
           <DotsVerticalIcon />
         </button>

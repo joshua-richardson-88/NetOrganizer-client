@@ -67,40 +67,42 @@ const UpdateBookmarkForm: FC<Props> = ({
       <div className='modal-backdrop' />
       <div className='modal'>
         <div className='header'>
-          <h4>Add A New Bookmark</h4>
+          <h4>Update Bookmark</h4>
           <button onClick={handleClose}>X</button>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className='row'>
-            <label htmlFor='title'>Title</label>
-            <input
-              autoComplete='off'
-              autoFocus
-              id='title'
-              onChange={handleUpdate}
-              type='text'
-              value={inputTitle}
-            />
-          </div>
-          <div className='row'>
-            <label htmlFor='url'>Link URL</label>
-            <input
-              autoComplete='off'
-              id='url'
-              onChange={handleUpdate}
-              type='text'
-              value={inputUrl}
-            />
-          </div>
-          <div className='row'>
-            <label htmlFor='notes'>Notes</label>
-            <input
-              autoComplete='off'
-              id='notes'
-              onChange={handleUpdate}
-              type='text'
-              value={inputNotes}
-            />
+          <div className='form-body'>
+            <div className='row'>
+              <label htmlFor='title'>Title</label>
+              <input
+                autoComplete='off'
+                autoFocus
+                id='title'
+                onChange={handleUpdate}
+                type='text'
+                value={inputTitle}
+              />
+            </div>
+            <div className='row'>
+              <label htmlFor='url'>Link URL</label>
+              <input
+                autoComplete='off'
+                id='url'
+                onChange={handleUpdate}
+                type='text'
+                value={inputUrl}
+              />
+            </div>
+            <div className='row'>
+              <label htmlFor='notes'>Notes</label>
+              <input
+                autoComplete='off'
+                id='notes'
+                onChange={handleUpdate}
+                type='text'
+                value={inputNotes}
+              />
+            </div>
           </div>
           <button type='submit'>Save</button>
         </form>

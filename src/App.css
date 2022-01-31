@@ -157,7 +157,7 @@ main > .fab:hover {
   align-items: center;
   padding: 0;
 }
-.card-header > .open-all-button {
+.card-header > .button-right {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;

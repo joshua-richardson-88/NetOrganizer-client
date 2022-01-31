@@ -8,8 +8,8 @@ import Bookmark from '../../bookmarks'
 import Portal from '../../bookmarks/components/Portal'
 import CardHeader from './CardHeader'
 
-type Props = { id: string; tabTitle: string }
-const Category: FC<Props> = ({ id, tabTitle }) => {
+type Props = { id: string; tabId: string; tabTitle: string }
+const Category: FC<Props> = ({ id, tabId, tabTitle }) => {
   const { [id]: thisCategory } = useSelector((state) => state.categories)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,7 +17,7 @@ const Category: FC<Props> = ({ id, tabTitle }) => {
   const addBookmark = () => setIsModalOpen(true)
   return (
     <div className='card'>
-      <CardHeader id={id} title={thisCategory.title} />
+      <CardHeader id={id} tabId={tabId} title={thisCategory.title} />
       <div className='card-body'>
         <div className='bookmark-links'>
           {thisCategory.bookmarks.map((bookmarkId) => (

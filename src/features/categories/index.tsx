@@ -23,6 +23,7 @@ const Content: FC<Props> = () => {
           <Category
             key={categoryId}
             id={categoryId}
+            tabId={order[activeTab]}
             tabTitle={list[order[activeTab]].title}
           />
         ))}

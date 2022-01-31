@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--background-dark-0);
+}
+.tablist {
+  display: flex;
+  flex: 1;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+.tablist > div > h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark-1);
+  user-select: none;
+  cursor: pointer;
+}
+.tablist > div > h2:hover {
+  color: var(--text-dark-2);
+}
+.tablist > div > h2.active {
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--primary-dark);
+}
+.tablist > div > h2.edit-mode {
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+.tablist > div > h2.edit-mode:hover,
+.tablist > div > h2.edit-mode.active:hover {
+  color: var(--text-dark-3);
+}

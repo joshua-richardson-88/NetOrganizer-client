@@ -1,46 +1,16 @@
+:root {
+  --primary-dark: hsl(207, 39%, 53%);
+  --background-dark-0: hsl(0, 0%, 7%);
+  --text-dark-0: hsl(0, 0%, 93%);
+  --text-dark-1: hsl(0, 0%, 73%);
+  --text-dark-2: hsl(0, 0%, 40%);
+  --text-dark-3: hsl(0, 0%, 27%);
+}
+
 #root {
   flex: 1;
   display: flex;
   flex-flow: column nowrap;
-}
-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #121212;
-}
-header > .tablist {
-  display: flex;
-  flex: 1;
-  flex-flow: row nowrap;
-  gap: 1rem;
-}
-.tablist > div > h2 {
-  margin: 0;
-  padding: 0;
-  color: #eee;
-  user-select: none;
-  cursor: pointer;
-}
-.tablist > div > h2.editMode {
-  background-color: hsla(0, 0%, 100%, 0.3);
-}
-.tablist > div > h2.active {
-  padding-bottom: 3px;
-  border-bottom: hsl(207, 39%, 53%) 2px solid;
-}
-.tablist > div > h2:not(.active) {
-  color: #bbb;
-}
-.tablist > div > h2:hover {
-  color: #666;
-}
-.tablist > div > h2.editMode:hover,
-.tablist > div > h2.editMode.active:hover {
-  color: #444;
 }
 button {
   height: max-content;

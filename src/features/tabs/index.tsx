@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from '../../hooks/useRedux'
 import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
 import { createTab } from './tabSlice'
 import Tab from './components/Tab'
+import './index.css'
 
 // types
 

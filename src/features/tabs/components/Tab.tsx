@@ -39,7 +39,7 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
       ) : (
         <h2
           className={
-            inEditMode ? 'editMode' : activeTab === position ? 'active' : ''
+            inEditMode ? 'edit-mode' : activeTab === position ? 'active' : ''
           }
           onClick={handleClick}
         >

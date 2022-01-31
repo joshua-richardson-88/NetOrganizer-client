@@ -12,7 +12,7 @@ export type FormData = {
   tabTitle: string
 }
 type Props = { data: FormData; onClose: (state: boolean) => void }
-const Form: FC<Props> = ({
+const NewBookmarkForm: FC<Props> = ({
   data: { categoryId, categoryTitle, tabTitle },
   onClose,
 }) => {
@@ -106,4 +106,4 @@ const Form: FC<Props> = ({
   )
 }
 
-export default Form
+export default NewBookmarkForm

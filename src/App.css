@@ -69,10 +69,12 @@ button > svg {
   width: 16px;
 }
 button:hover > svg,
+button:focus > svg,
 button.active > svg {
   color: #121212;
 }
 button:hover,
+button:focus,
 button.active {
   background-color: #eee;
   color: #121212;
@@ -295,6 +297,7 @@ form > .row > input {
   border: none;
   position: relative;
   border-bottom: 2px solid hsla(0, 0%, 0%, 0.4);
+  color: #eee;
 }
 form > .row > input:focus {
   background-color: hsla(0, 0%, 100%, 0.05);

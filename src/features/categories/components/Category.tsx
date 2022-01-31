@@ -21,18 +21,19 @@ const Category: FC<Props> = ({ id, tabTitle }) => {
       <div className='card-body'>
         <div className='bookmark-links'>
           {thisCategory.bookmarks.map((bookmarkId) => (
-            <Bookmark key={bookmarkId} id={bookmarkId} />
+            <Bookmark id={bookmarkId} key={bookmarkId} />
           ))}
         </div>
         <button onClick={addBookmark}>Add Bookmark</button>
         <Portal
-          isOpen={isModalOpen}
-          onClose={setIsModalOpen}
           data={{
             categoryId: id,
             categoryTitle: thisCategory.title,
             tabTitle,
           }}
+          isOpen={isModalOpen}
+          onClose={setIsModalOpen}
+          type='new'
         />
       </div>
     </div>

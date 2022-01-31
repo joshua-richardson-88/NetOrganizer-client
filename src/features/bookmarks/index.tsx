@@ -7,15 +7,20 @@ import { useSelector } from '../../hooks/useRedux'
 import BookmarkIcon from './components/BookmarkIcon'
 import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../assets/deleteIcon.svg'
+import Portal from './components/Portal'
 
-type Props = { id: string }
+type Props = {
+  id: string
+}
 const Bookmark: FC<Props> = ({ id }) => {
   const { [id]: thisBookmark } = useSelector((state) => state.bookmarks)
 
   const [hovered, setHovered] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
 
   const handleMouseOver = () => setHovered(true)
   const handleMouseLeave = () => setHovered(false)
+  const handleEditClick = () => setFormOpen(true)
 
   return (
     <div
@@ -31,7 +36,7 @@ const Bookmark: FC<Props> = ({ id }) => {
       </div>
       <div className='bookmark-buttons'>
         {hovered && (
-          <button>
+          <button onClick={handleEditClick}>
             <EditIcon />
           </button>
         )}
@@ -41,6 +46,17 @@ const Bookmark: FC<Props> = ({ id }) => {
           </button>
         )}
       </div>
+      <Portal
+        data={{
+          id,
+          notes: thisBookmark.notes,
+          title: thisBookmark.title,
+          url: thisBookmark.url,
+        }}
+        isOpen={formOpen}
+        onClose={setFormOpen}
+        type='edit'
+      />
     </div>
   )
 }

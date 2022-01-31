@@ -62,6 +62,10 @@ const bookmarkSlice = createSlice({
         ...state[bookmarkId],
         [key]: value.trim(),
       }
+      state[bookmarkId].activity.push({
+        what: `Updated ${key} to ${value}`,
+        when: Date.now(),
+      })
     },
     updateBookmarkTag: (
       state,
@@ -176,7 +180,7 @@ export interface CreateBookmarkPayload {
 }
 interface UpdateBookmarkPayload {
   bookmarkId: string
-  key: 'notes' | 'title'
+  key: 'notes' | 'title' | 'url'
   value: string
 }
 export interface UpdateBookmarkTagPayload {

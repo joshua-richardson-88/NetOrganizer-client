@@ -7,9 +7,11 @@ import bookmarkReducer from '../features/bookmarks/bookmarkSlice'
 import categoryReducer from '../features/categories/categorySlice'
 import tabReducer from '../features/tabs/tabSlice'
 import tagReducer from '../features/tags/tagSlice'
+import userReducer from '../features/auth/userSlice'
 
 const store = configureStore({
   reducer: {
+    auth: userReducer,
     bookmarks: bookmarkReducer,
     categories: categoryReducer,
     tabs: tabReducer,

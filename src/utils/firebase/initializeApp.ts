@@ -21,8 +21,7 @@ const firebaseConfig = {
   messagingSenderId: REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: REACT_APP_FIREBASE_APP_ID,
 }
-console.log(process.env)
-console.log(firebaseConfig)
+
 // Initialize Firebase
 let firebaseApp: FirebaseApp
 

@@ -1,5 +1,4 @@
 // types
-import defaultState from './defaultState'
 import type { RootState } from './store'
 
 const STORAGE_KEY = 'persistantState'
@@ -14,7 +13,7 @@ export const saveToLocalStorage = (state: RootState) => {
 export const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem(STORAGE_KEY)
-    if (serializedState === null) return defaultState
+    if (serializedState === null) return undefined
     return JSON.parse(serializedState)
   } catch (error) {
     console.warn(error)

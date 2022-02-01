@@ -1,6 +1,5 @@
 // modules
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { nanoid } from 'nanoid'
 
 // project files
 import titleReplacer from '../../utils/titleReplacer'
@@ -21,17 +20,16 @@ const tabSlice = createSlice({
   name: 'tabs',
   initialState,
   reducers: {
-    createTab: {
-      reducer: (state, action: PayloadAction<CreateTabPayload>) => {
-        const { id, ...tab } = action.payload
-        state.order.push(id)
-        state.list[id] = tab
-      },
-      prepare: ({ tabTitle }: CreateTabInput) => {
-        const id = nanoid()
-        const title = titleReplacer(tabTitle)
-        return { payload: { id, title, categories: [] } }
-      },
+    createTab: (state, action: PayloadAction<CreateTabPayload>) => {
+      const { id, ...tab } = action.payload
+
+      if (state.list[id]) return
+
+      state.order.push(id)
+      state.list[id] = tab
+    },
+    addTabOrder: (state, action: PayloadAction<CreateTabOrder>) => {
+      state.order = action.payload.order
     },
     deleteTab: (state, action: PayloadAction<DeleteTabPayload>) => {
       const { id } = action.payload
@@ -122,11 +120,11 @@ export interface Tab {
   title: string
   categories: string[]
 }
-interface CreateTabInput {
-  tabTitle: string
-}
 interface CreateTabPayload extends Tab {
   id: string
+}
+interface CreateTabOrder {
+  order: string[]
 }
 export interface DeleteTabPayload {
   id: string

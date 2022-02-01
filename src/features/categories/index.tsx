@@ -16,24 +16,20 @@ const Content: FC<Props> = () => {
     dispatch(createCategory(newCategory))
   }
 
-  if (activeTab < 0)
-    return (
-      <main>
-        <h1 className='blank-category'>Select a Tab to begin</h1>
-      </main>
-    )
+  if (activeTab < 0) return <BlankPage />
 
   return (
     <main>
       <div className='category-list'>
-        {list[order[activeTab]].categories.map((categoryId, index) => (
-          <Category
-            key={categoryId}
-            id={categoryId}
-            tabId={order[activeTab]}
-            tabTitle={list[order[activeTab]].title}
-          />
-        ))}
+        {list[order[activeTab]].categories &&
+          list[order[activeTab]].categories.map((categoryId, index) => (
+            <Category
+              key={categoryId}
+              id={categoryId}
+              tabId={order[activeTab]}
+              tabTitle={list[order[activeTab]].title}
+            />
+          ))}
       </div>
       <button className='fab' onClick={addCategory}>
         +
@@ -43,3 +39,9 @@ const Content: FC<Props> = () => {
 }
 
 export default Content
+
+const BlankPage = () => (
+  <main>
+    <h1 className='blank-category'>Select a Tab to begin</h1>
+  </main>
+)

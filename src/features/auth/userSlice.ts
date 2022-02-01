@@ -3,13 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // project files
 import { userSignIn, userSignOut } from './thunks'
+
 // types
 
 const initialState: User = {
-  uid: null,
-  email: null,
   displayName: null,
+  email: null,
   status: null,
+  uid: null,
 }
 
 const userSlice = createSlice({
@@ -52,8 +53,8 @@ export default userSlice.reducer
 
 type UserStatus = 'loading' | 'succeeded' | 'failed'
 export interface User {
-  uid: string | null
-  email: string | null
   displayName: string | null
+  email: string | null
   status: UserStatus | null
+  uid: string | null
 }

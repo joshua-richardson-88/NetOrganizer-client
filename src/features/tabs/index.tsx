@@ -5,7 +5,7 @@ import { FC, useRef } from 'react'
 // project files
 import { useDispatch, useSelector } from '../../hooks/useRedux'
 import { ReactComponent as DotsVerticalIcon } from '../../assets/dotsVerticalIcon.svg'
-import { createTab } from './tabSlice'
+import { addTab } from './thunks'
 import Tab from './components/Tab'
 import './index.css'
 import useToggle from '../../hooks/useToggle'
@@ -27,8 +27,8 @@ const Header: FC<Props> = () => {
     toggleEditMode()
     toggleMenuOpen()
   }
-  const addTab = () => {
-    dispatch(createTab({ tabTitle: 'New Tab' }))
+  const addNewTab = () => {
+    dispatch(addTab('New Tab'))
     toggleMenuOpen()
   }
 
@@ -42,7 +42,7 @@ const Header: FC<Props> = () => {
         </button>
         {isMenuOpen && (
           <ul className='menu-links'>
-            <li onClick={addTab}>Add A Tab</li>
+            <li onClick={addNewTab}>Add A Tab</li>
             <li onClick={handleEditModeClick}>
               {isEditMode ? 'Done Editing' : 'Edit Tabs'}
             </li>

@@ -9,6 +9,7 @@ import Header from './features/tabs'
 import Content from './features/categories'
 import { useDispatch, useSelector } from './hooks/useRedux'
 import { userSignIn } from './features/auth/thunks'
+import { getData } from './features/tabs/thunks'
 
 function App() {
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ function App() {
       dispatch(userSignIn())
       return
     }
+    dispatch(getData())
   }, [uid, dispatch])
 
   return (

@@ -15,6 +15,9 @@ const Category: FC<Props> = ({ id, tabId, tabTitle }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const addBookmark = () => setIsModalOpen(true)
+
+  if (!thisCategory) return null
+
   return (
     <div className='card'>
       <CardHeader id={id} tabId={tabId} title={thisCategory.title} />

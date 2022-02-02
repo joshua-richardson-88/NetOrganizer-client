@@ -9,7 +9,7 @@ import { ReactComponent as DeleteIcon } from '../../../assets/deleteIcon.svg'
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
 import CardTitle from './CardTitle'
 import { deleteBookmark } from '../../bookmarks/thunks'
-import { deleteCategory } from '../categorySlice'
+import { deleteCategory } from '../thunks'
 
 type Props = { id: string; tabId: string; title: string }
 const CardHeader: FC<Props> = ({ id, tabId, title }) => {

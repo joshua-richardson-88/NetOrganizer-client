@@ -15,7 +15,7 @@ const categorySlice = createSlice({
       state[id] = category
     },
     deleteCategory: (state, action: PayloadAction<DeleteCategoryPayload>) => {
-      delete state[action.payload.categoryId]
+      delete state[action.payload.id]
     },
     updateBookmarkOrder: (
       state,
@@ -65,8 +65,7 @@ export interface CreateCategoryPayload extends Category {
   id: string
 }
 export interface DeleteCategoryPayload {
-  categoryId: string
-  tabId: string
+  id: string
 }
 interface UpdateCategoryPayload extends Category {
   id: string

@@ -6,9 +6,17 @@ import { collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore'
 import { db } from '../../../utils/firebase/firebase'
 import { setDefaultData } from './setDefaultData'
 import { queryListeners } from '../../auth/thunks'
-import { createTab, updateTab } from '../tabSlice'
-import { createCategory, updateCategory } from '../../categories/categorySlice'
-import { createBookmark, deleteBookmark } from '../../bookmarks/bookmarkSlice'
+import { createTab, deleteTab, updateTab } from '../tabSlice'
+import {
+  createCategory,
+  deleteCategory,
+  updateCategory,
+} from '../../categories/categorySlice'
+import {
+  createBookmark,
+  deleteBookmark,
+  updateBookmark,
+} from '../../bookmarks/bookmarkSlice'
 
 // types
 import type { AppDispatch, RootState } from '../../../app/store'
@@ -55,7 +63,7 @@ export const getData = createAsyncThunk<
           dispatch(updateTab(tab))
         }
         if (change.type === 'removed') {
-          // dispatch(deleteTab({ id }))
+          dispatch(deleteTab({ id }))
         }
       })
     })
@@ -72,6 +80,7 @@ export const getData = createAsyncThunk<
           dispatch(updateCategory(category))
         }
         if (change.type === 'removed') {
+          dispatch(deleteCategory({ id }))
         }
       })
     })
@@ -85,6 +94,7 @@ export const getData = createAsyncThunk<
           dispatch(createBookmark({ id, ...bookmark }))
         }
         if (change.type === 'modified') {
+          // dispatch(updateBookmark({ id, ...bookmark }))
         }
         if (change.type === 'removed') {
           dispatch(deleteBookmark({ id }))

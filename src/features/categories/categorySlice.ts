@@ -43,13 +43,9 @@ const categorySlice = createSlice({
       state[categoryStart.id].bookmarks.splice(sourceIndex, 1)
       state[categoryEnd.id].bookmarks.splice(destinationIndex, 1, bookmark)
     },
-    updateCategoryTitle: (
-      state,
-      action: PayloadAction<UpdateCategoryTitlePayload>
-    ) => {
-      const { id, newTitle } = action.payload
-
-      state[id].title = titleReplacer(newTitle)
+    updateCategory: (state, action: PayloadAction<UpdateCategoryPayload>) => {
+      const { id, ...category } = action.payload
+      state[id] = category
     },
   },
   extraReducers: {
@@ -80,7 +76,7 @@ export const {
   createCategory,
   deleteCategory,
   updateBookmarkOrder,
-  updateCategoryTitle,
+  updateCategory,
 } = categorySlice.actions
 export interface Categories {
   [key: string]: Category
@@ -96,9 +92,8 @@ export interface DeleteCategoryPayload {
   categoryId: string
   tabId: string
 }
-interface UpdateCategoryTitlePayload {
+interface UpdateCategoryPayload extends Category {
   id: string
-  newTitle: string
 }
 export interface UpdateBookmarkOrderPayload {
   /**

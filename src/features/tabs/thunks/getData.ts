@@ -10,7 +10,7 @@ import { queryListeners } from '../../auth/thunks'
 // types
 import { AppDispatch, RootState } from '../../../app/store'
 import { createTab, deleteTab, updateTab } from '../tabSlice'
-import { createCategory } from '../../categories/categorySlice'
+import { createCategory, updateCategory } from '../../categories/categorySlice'
 
 export const getData = createAsyncThunk<
   void,
@@ -42,12 +42,15 @@ export const getData = createAsyncThunk<
       snapshot.docChanges().forEach((change) => {
         const id = change.doc.id
         const { title, categories } = change.doc.data()
+        const tab = { id, title, categories }
+
+        if (!id || !title || !categories) return
 
         if (change.type === 'added') {
-          dispatch(createTab({ id, title, categories }))
+          dispatch(createTab(tab))
         }
         if (change.type === 'modified') {
-          dispatch(updateTab({ id, title, categories }))
+          dispatch(updateTab(tab))
         }
         if (change.type === 'removed') {
           dispatch(deleteTab({ id }))
@@ -58,11 +61,13 @@ export const getData = createAsyncThunk<
       snapshot.docChanges().forEach((change) => {
         const id = change.doc.id
         const { title, bookmarks } = change.doc.data()
+        const category = { id, title, bookmarks }
 
         if (change.type === 'added') {
-          dispatch(createCategory({ id, title, bookmarks }))
+          dispatch(createCategory(category))
         }
         if (change.type === 'modified') {
+          dispatch(updateCategory(category))
         }
         if (change.type === 'removed') {
         }

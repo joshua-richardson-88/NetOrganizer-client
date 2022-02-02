@@ -2,7 +2,7 @@
 import { FC, useState } from 'react'
 import TitleInput from '../../../components/TitleInput'
 import { useDispatch } from '../../../hooks/useRedux'
-import { updateCategoryTitle } from '../categorySlice'
+import { updateCategoryTitle } from '../thunks'
 
 // modules
 
@@ -16,8 +16,8 @@ const CardTitle: FC<Props> = ({ id, inEditMode, title }) => {
   const handleClick = () => {
     if (inEditMode) setEditTitle(true)
   }
-  const updateTitle = (newTitle: string) => {
-    dispatch(updateCategoryTitle({ id, newTitle }))
+  const updateTitle = (title: string) => {
+    dispatch(updateCategoryTitle({ id, title }))
     setEditTitle(false)
   }
   return (

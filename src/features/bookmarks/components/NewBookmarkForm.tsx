@@ -1,12 +1,10 @@
 // react
 import React, { FC, useState } from 'react'
-import { useDispatch } from '../../../hooks/useRedux'
-import { addBookmarkCategory } from '../../categories/thunks/addBookmarkCategory'
-import { createBookmark } from '../bookmarkSlice'
-import { addBookmark } from '../thunks'
 
 // modules
 // project files
+import { useDispatch } from '../../../hooks/useRedux'
+import { addBookmark } from '../thunks'
 
 export type FormData = {
   categoryId: string

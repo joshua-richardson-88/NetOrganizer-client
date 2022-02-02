@@ -16,7 +16,7 @@ export const addBookmark = createAsyncThunk<
   Payload,
   { dispatch: AppDispatch; state: RootState }
 >('tabs/addTab', async (newBookmark, { dispatch, getState }) => {
-  const { categoryId, ...bookmark } = newBookmark
+  const { categoryId, bookmark } = newBookmark
   const {
     auth: { uid },
   } = getState()

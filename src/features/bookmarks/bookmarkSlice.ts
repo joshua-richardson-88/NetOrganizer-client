@@ -1,9 +1,7 @@
 // modules
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { nanoid } from 'nanoid'
 
 // project files
-import titleReplacer from '../../utils/titleReplacer'
 
 // types
 import type { UpdateBookmarkOrderPayload } from '../categories/categorySlice'
@@ -14,44 +12,9 @@ const bookmarkSlice = createSlice({
   name: 'bookmarks',
   initialState,
   reducers: {
-    createBookmark: {
-      reducer: (state, action: PayloadAction<CreateBookmarkPayload>) => {
-        const { bookmark, bookmarkId } = action.payload
-        state[bookmarkId] = bookmark
-      },
-      prepare: ({
-        categoryId,
-        categoryTitle,
-        notes,
-        tabTitle,
-        tags,
-        newTitle,
-        url,
-      }: CreateBookmarkInput) => {
-        const id = nanoid()
-        const title = titleReplacer(newTitle)
-
-        return {
-          payload: {
-            categoryId,
-            bookmarkId: id,
-            bookmark: {
-              activity: [
-                {
-                  what: `Bookmark added to ${categoryTitle} in ${tabTitle}`,
-                  when: Date.now(),
-                },
-              ],
-              notes,
-              tags,
-              title,
-              url,
-            },
-          },
-          meta: null,
-          error: null,
-        }
-      },
+    createBookmark: (state, action: PayloadAction<CreateBookmarkPayload>) => {
+      const { id, ...bookmark } = action.payload
+      state[id] = bookmark
     },
     deleteBookmark: (state, action: PayloadAction<DeleteBookmarkPayload>) => {
       delete state[action.payload.bookmarkId]
@@ -116,7 +79,7 @@ export const {
 export interface Bookmarks {
   [key: string]: Bookmark
 }
-interface BookmarkBase {
+export interface Bookmark {
   /**
    * @description User defined notes for this bookmark
    */
@@ -129,8 +92,6 @@ interface BookmarkBase {
    * @description The URL this bookmark points to
    */
   url: string
-}
-export interface Bookmark extends BookmarkBase {
   /**
    * @description An activity feed of all activity items that have occured to
    *              this bookmark
@@ -151,32 +112,8 @@ export interface Activity {
    */
   when: number
 }
-interface CreateBookmarkInput extends BookmarkBase {
-  /**
-   * @description The id of the category this bookmark belongs to. Used in
-   *              categorySlice extraReducers to add the bookmark to its list
-   */
-  categoryId: string
-  /**
-   * @description The title of the category this bookmark belongs to. Used to
-   *              generate the activity feed for the create method
-   */
-  categoryTitle: string
-  /**
-   * @description The title of the Tab that the category and this bookmark
-   *              belongs to. Used to generate the activity feed for the
-   *              create method
-   */
-  tabTitle: string
-  /**
-   * @description The title of the bookmark the user is creating
-   */
-  newTitle: string
-}
-export interface CreateBookmarkPayload {
-  bookmarkId: string
-  bookmark: Bookmark
-  categoryId: string
+export interface CreateBookmarkPayload extends Bookmark {
+  id: string
 }
 interface UpdateBookmarkPayload {
   bookmarkId: string

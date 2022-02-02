@@ -3,10 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // project files
 // types
-import type {
-  CreateBookmarkPayload,
-  DeleteBookmarkPayload,
-} from '../bookmarks/bookmarkSlice'
 
 const initialState: Categories = {}
 
@@ -47,24 +43,6 @@ const categorySlice = createSlice({
     },
   },
   extraReducers: {
-    'bookmarks/createBookmark': (
-      state,
-      action: PayloadAction<CreateBookmarkPayload>
-    ) => {
-      const { bookmarkId, categoryId } = action.payload
-
-      state[categoryId].bookmarks.push(bookmarkId)
-    },
-    'bookmarks/deleteBookmark': (
-      state,
-      action: PayloadAction<DeleteBookmarkPayload>
-    ) => {
-      const { bookmarkId, categoryId } = action.payload
-
-      state[categoryId].bookmarks = state[categoryId].bookmarks.filter(
-        (id) => id !== bookmarkId
-      )
-    },
     'tabs/dropAll': (state) => ({}),
   },
 })

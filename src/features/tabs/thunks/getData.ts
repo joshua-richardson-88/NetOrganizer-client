@@ -6,11 +6,13 @@ import { collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore'
 import { db } from '../../../utils/firebase/firebase'
 import { setDefaultData } from './setDefaultData'
 import { queryListeners } from '../../auth/thunks'
+import { createTab, updateTab } from '../tabSlice'
+import { createCategory, updateCategory } from '../../categories/categorySlice'
+import { createBookmark } from '../../bookmarks/bookmarkSlice'
 
 // types
-import { AppDispatch, RootState } from '../../../app/store'
-import { createTab, deleteTab, updateTab } from '../tabSlice'
-import { createCategory, updateCategory } from '../../categories/categorySlice'
+import type { AppDispatch, RootState } from '../../../app/store'
+import type { Bookmark } from '../../bookmarks/bookmarkSlice'
 
 export const getData = createAsyncThunk<
   void,
@@ -76,9 +78,11 @@ export const getData = createAsyncThunk<
     const bookmarkUnsubscribe = onSnapshot(bookmarkQuery, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         const id = change.doc.id
-        const { title, bookmarks } = change.doc.data()
+        console.log(change.doc.data())
+        const bookmark = change.doc.data() as Bookmark
 
         if (change.type === 'added') {
+          dispatch(createBookmark({ id, ...bookmark }))
         }
         if (change.type === 'modified') {
         }

@@ -1,7 +1,9 @@
 // react
 import React, { FC, useState } from 'react'
 import { useDispatch } from '../../../hooks/useRedux'
+import { addBookmarkCategory } from '../../categories/thunks/addBookmarkCategory'
 import { createBookmark } from '../bookmarkSlice'
+import { addBookmark } from '../thunks'
 
 // modules
 // project files
@@ -44,15 +46,21 @@ const NewBookmarkForm: FC<Props> = ({
     if (!url) return
 
     const newBookmark = {
+      bookmark: {
+        activity: [
+          {
+            what: `Created in category ${categoryTitle} on tab ${tabTitle}`,
+            when: Date.now(),
+          },
+        ],
+        notes,
+        tags: [],
+        title,
+        url,
+      },
       categoryId,
-      categoryTitle,
-      tabTitle,
-      newTitle: title,
-      notes,
-      tags: [],
-      url,
     }
-    dispatch(createBookmark(newBookmark))
+    dispatch(addBookmark(newBookmark))
 
     setTitle('')
     setUrl('')

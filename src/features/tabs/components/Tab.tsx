@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from '../../../hooks/useRedux'
 import { updateActiveTab } from '../tabSlice'
 import TitleInput from '../../../components/TitleInput'
 import { deleteBookmark } from '../../bookmarks/thunks'
-import { deleteCategory } from '../../categories/categorySlice'
+import { deleteCategory } from '../../categories/thunks'
 import { deleteTab, updateTabTitle } from '../thunks'
 
 type Props = { id: string; inEditMode: boolean; position: number }

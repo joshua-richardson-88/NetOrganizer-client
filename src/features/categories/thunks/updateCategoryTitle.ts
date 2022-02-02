@@ -4,6 +4,7 @@ import { doc, updateDoc } from 'firebase/firestore'
 
 // project files
 import { db } from '../../../utils/firebase/firebase'
+import titleReplacer from '../../../utils/titleReplacer'
 
 // types
 import { AppDispatch, RootState } from '../../../app/store'
@@ -21,7 +22,9 @@ export const updateCategoryTitle = createAsyncThunk<
   if (!uid) return
 
   try {
-    await updateDoc(doc(db, 'users', uid, 'categories', id), { title })
+    await updateDoc(doc(db, 'users', uid, 'categories', id), {
+      title: titleReplacer(title),
+    })
   } catch (error) {
     console.log('got an error: ', error)
   }

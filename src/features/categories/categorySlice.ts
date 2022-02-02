@@ -2,8 +2,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // project files
-import titleReplacer from '../../utils/titleReplacer'
-
 // types
 import type {
   CreateBookmarkPayload,

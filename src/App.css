@@ -48,3 +48,20 @@ button.active {
   background-color: #eee;
   color: #121212;
 }
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  background-color: var(--background-dark-0);
+}
+.login h1 {
+  color: var(--text-dark-0);
+}
+.login span {
+  margin-bottom: 2rem;
+  color: var(--text-dark-2);
+}

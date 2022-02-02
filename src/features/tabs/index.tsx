@@ -3,11 +3,12 @@ import { FC, useRef } from 'react'
 
 // modules
 // project files
-import { useDispatch, useSelector } from '../../hooks/useRedux'
-import { ReactComponent as DotsVerticalIcon } from '../../assets/dotsVerticalIcon.svg'
+import './index.css'
 import { addTab } from './thunks'
 import Tab from './components/Tab'
-import './index.css'
+import { userSignOut } from '../auth/thunks'
+import { ReactComponent as DotsVerticalIcon } from '../../assets/dotsVerticalIcon.svg'
+import { useDispatch, useSelector } from '../../hooks/useRedux'
 import useToggle from '../../hooks/useToggle'
 import useOutsideClick from '../../hooks/useOutsideClick'
 
@@ -31,6 +32,7 @@ const Header: FC<Props> = () => {
     dispatch(addTab('New Tab'))
     toggleMenuOpen()
   }
+  const handleSignOut = () => dispatch(userSignOut())
 
   useOutsideClick(menuRef, () => toggleMenuOpen(false))
 
@@ -46,6 +48,7 @@ const Header: FC<Props> = () => {
             <li onClick={handleEditModeClick}>
               {isEditMode ? 'Done Editing' : 'Edit Tabs'}
             </li>
+            <li onClick={handleSignOut}>Sign Out</li>
           </ul>
         )}
       </div>

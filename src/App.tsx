@@ -14,14 +14,22 @@ import { getData } from './features/tabs/thunks'
 function App() {
   const dispatch = useDispatch()
   const { uid } = useSelector((state) => state.auth)
+  const { order } = useSelector((state) => state.tabs)
+
+  const handleSignIn = () => dispatch(userSignIn())
 
   useEffect(() => {
-    if (!uid) {
-      dispatch(userSignIn())
-      return
-    }
-    dispatch(getData())
-  }, [uid, dispatch])
+    if (uid && order.length === 0) dispatch(getData())
+  }, [dispatch, order, uid])
+
+  if (!uid)
+    return (
+      <div className='login'>
+        <h1>NetOrganizer</h1>
+        <span>Bookmark management for power users</span>
+        <button onClick={handleSignIn}>Sign in with Google</button>
+      </div>
+    )
 
   return (
     <>

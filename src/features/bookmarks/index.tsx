@@ -3,12 +3,12 @@ import { FC, useState } from 'react'
 
 // modules
 // project files
-import { useDispatch, useSelector } from '../../hooks/useRedux'
+import Portal from './components/Portal'
 import BookmarkIcon from './components/BookmarkIcon'
+import { deleteBookmark } from './thunks'
 import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
 import { ReactComponent as DeleteIcon } from '../../assets/deleteIcon.svg'
-import Portal from './components/Portal'
-import { deleteBookmark } from './bookmarkSlice'
+import { useDispatch, useSelector } from '../../hooks/useRedux'
 
 type Props = {
   categoryId: string

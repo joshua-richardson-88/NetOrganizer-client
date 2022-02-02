@@ -6,7 +6,7 @@ import { FC, useState } from 'react'
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
 import { updateActiveTab } from '../tabSlice'
 import TitleInput from '../../../components/TitleInput'
-import { deleteBookmark } from '../../bookmarks/bookmarkSlice'
+import { deleteBookmark } from '../../bookmarks/thunks'
 import { deleteCategory } from '../../categories/categorySlice'
 import { deleteTab, updateTabTitle } from '../thunks'
 

@@ -8,7 +8,7 @@ import { setDefaultData } from './setDefaultData'
 import { queryListeners } from '../../auth/thunks'
 import { createTab, updateTab } from '../tabSlice'
 import { createCategory, updateCategory } from '../../categories/categorySlice'
-import { createBookmark } from '../../bookmarks/bookmarkSlice'
+import { createBookmark, deleteBookmark } from '../../bookmarks/bookmarkSlice'
 
 // types
 import type { AppDispatch, RootState } from '../../../app/store'
@@ -87,6 +87,7 @@ export const getData = createAsyncThunk<
         if (change.type === 'modified') {
         }
         if (change.type === 'removed') {
+          dispatch(deleteBookmark({ id }))
         }
       })
     })

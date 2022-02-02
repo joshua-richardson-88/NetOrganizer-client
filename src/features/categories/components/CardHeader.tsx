@@ -8,7 +8,7 @@ import { ReactComponent as OpenAllLinks } from '../../../assets/externalLink.svg
 import { ReactComponent as DeleteIcon } from '../../../assets/deleteIcon.svg'
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
 import CardTitle from './CardTitle'
-import { deleteBookmark } from '../../bookmarks/bookmarkSlice'
+import { deleteBookmark } from '../../bookmarks/thunks'
 import { deleteCategory } from '../categorySlice'
 
 type Props = { id: string; tabId: string; title: string }

@@ -17,7 +17,7 @@ const bookmarkSlice = createSlice({
       state[id] = bookmark
     },
     deleteBookmark: (state, action: PayloadAction<DeleteBookmarkPayload>) => {
-      delete state[action.payload.bookmarkId]
+      delete state[action.payload.id]
     },
     updateBookmark: (state, action: PayloadAction<UpdateBookmarkPayload>) => {
       const { bookmarkId, key, value } = action.payload
@@ -125,6 +125,5 @@ export interface UpdateBookmarkTagPayload {
   tagId: string
 }
 export interface DeleteBookmarkPayload {
-  bookmarkId: string
-  categoryId: string
+  id: string
 }

@@ -15,6 +15,7 @@ export const editBookmark = createAsyncThunk<
   Payload,
   { dispatch: AppDispatch; state: RootState }
 >('tabs/addTab', async ({ id, key, value }, { dispatch, getState }) => {
+  console.log('Edit triggered')
   const {
     auth: { uid },
     bookmarks: {
@@ -26,13 +27,15 @@ export const editBookmark = createAsyncThunk<
 
   const newValue = key === 'title' ? titleReplacer(value) : value
 
+  const newActivity = {
+    what: `Updated ${key} to ${value}`,
+    when: Date.now(),
+  }
+
   try {
     await updateDoc(doc(db, 'users', uid, 'bookmarks', id), {
       [key]: newValue,
-      activity: activity.push({
-        what: `Updated ${key} to ${value}`,
-        when: Date.now(),
-      }),
+      activity: [...activity, newActivity],
     })
   } catch (error) {
     console.log('got an error: ', error)

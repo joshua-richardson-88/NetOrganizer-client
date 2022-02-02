@@ -94,7 +94,7 @@ export const getData = createAsyncThunk<
           dispatch(createBookmark({ id, ...bookmark }))
         }
         if (change.type === 'modified') {
-          // dispatch(updateBookmark({ id, ...bookmark }))
+          dispatch(updateBookmark({ id, ...bookmark }))
         }
         if (change.type === 'removed') {
           dispatch(deleteBookmark({ id }))

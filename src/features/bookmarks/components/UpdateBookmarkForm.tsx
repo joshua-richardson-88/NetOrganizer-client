@@ -1,10 +1,10 @@
 // react
 import React, { FC, useState } from 'react'
-import { useDispatch } from '../../../hooks/useRedux'
-import { updateBookmark } from '../bookmarkSlice'
 
 // modules
 // project files
+import { editBookmark } from '../thunks'
+import { useDispatch } from '../../../hooks/useRedux'
 
 export type UpdateFormData = {
   id: string
@@ -44,17 +44,13 @@ const UpdateBookmarkForm: FC<Props> = ({
     if (!inputTitle) return
     if (!inputUrl) return
     if (inputNotes !== notes) {
-      dispatch(
-        updateBookmark({ bookmarkId: id, key: 'notes', value: inputNotes })
-      )
+      dispatch(editBookmark({ id, key: 'notes', value: inputNotes }))
     }
     if (inputTitle !== title) {
-      dispatch(
-        updateBookmark({ bookmarkId: id, key: 'title', value: inputTitle })
-      )
+      dispatch(editBookmark({ id, key: 'title', value: inputTitle }))
     }
     if (inputUrl !== url) {
-      dispatch(updateBookmark({ bookmarkId: id, key: 'url', value: inputUrl }))
+      dispatch(editBookmark({ id, key: 'url', value: inputUrl }))
     }
     setTitle('')
     setUrl('')

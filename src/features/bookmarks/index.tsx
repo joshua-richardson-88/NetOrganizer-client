@@ -3,11 +3,12 @@ import { FC, useState } from 'react'
 
 // modules
 // project files
-import Portal from './components/Portal'
-import BookmarkIcon from './components/BookmarkIcon'
+import './index.css'
 import { deleteBookmark } from './thunks'
-import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
+import BookmarkIcon from './components/BookmarkIcon'
+import Portal from './components/Portal'
 import { ReactComponent as DeleteIcon } from '../../assets/deleteIcon.svg'
+import { ReactComponent as EditIcon } from '../../assets/editIcon.svg'
 import { useDispatch, useSelector } from '../../hooks/useRedux'
 
 type Props = {
@@ -18,7 +19,7 @@ const Bookmark: FC<Props> = ({ categoryId, id }) => {
   const dispatch = useDispatch()
   const { [id]: thisBookmark } = useSelector((state) => state.bookmarks)
 
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(true)
   const [formOpen, setFormOpen] = useState(false)
 
   const handleMouseOver = () => setHovered(true)

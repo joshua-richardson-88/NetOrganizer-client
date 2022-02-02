@@ -3,10 +3,11 @@ import { FC, useState } from 'react'
 
 // modules
 // project files
-import { useSelector } from '../../../hooks/useRedux'
+import './index.css'
+import CardHeader from './CardHeader'
 import Bookmark from '../../bookmarks'
 import Portal from '../../bookmarks/components/Portal'
-import CardHeader from './CardHeader'
+import { useSelector } from '../../../hooks/useRedux'
 
 type Props = { id: string; tabId: string; tabTitle: string }
 const Category: FC<Props> = ({ id, tabId, tabTitle }) => {
@@ -22,7 +23,7 @@ const Category: FC<Props> = ({ id, tabId, tabTitle }) => {
     <div className='card'>
       <CardHeader id={id} tabId={tabId} title={thisCategory.title} />
       <div className='card-body'>
-        <div className='bookmark-links'>
+        <div className='bookmark-container'>
           {thisCategory.bookmarks.map((bookmarkId) => (
             <Bookmark categoryId={id} id={bookmarkId} key={bookmarkId} />
           ))}

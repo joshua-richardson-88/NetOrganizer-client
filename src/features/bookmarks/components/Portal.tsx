@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 
 // modules
 // project files
+import './modal.css'
 import NewBookmarkForm from './NewBookmarkForm'
 import UpdateBookmarkForm from './UpdateBookmarkForm'
 

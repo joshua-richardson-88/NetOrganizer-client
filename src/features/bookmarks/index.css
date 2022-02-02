@@ -1,0 +1,57 @@
+.bookmark-container .row {
+  height: 32.78px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+.bookmark-container .row:last-child {
+  margin-bottom: 0.75rem;
+}
+.bookmark-content img {
+  margin-right: 0.5rem;
+}
+.bookmark-content a {
+  outline: none;
+  text-decoration: none;
+  width: fit-content;
+  padding: 2px 1px 0;
+  user-select: none;
+}
+.bookmark-content a:active {
+  background-color: var(--primary-dark);
+  color: var(--secondary-dark);
+}
+.bookmark-content a:focus,
+.bookmark-content a:hover {
+  padding: 0;
+  border-bottom: 1px solid;
+  background-color: var(--secondary-dark);
+}
+.bookmark-content a:active,
+.bookmark-content a:link,
+.bookmark-content a:visited {
+  color: var(--primary-dark);
+}
+.bookmark-buttons {
+  display: flex;
+  flex-direction: row;
+}
+.bookmark-buttons > button {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0;
+}
+.bookmark-buttons svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-dark-1);
+}
+.bookmark-buttons > button:hover svg {
+  color: var(--background-dark-0);
+}

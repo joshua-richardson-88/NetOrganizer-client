@@ -45,7 +45,7 @@ const CardHeader: FC<Props> = ({ id, tabId, title }) => {
       {showEditButton && (
         <>
           <button
-            className={inEditMode ? 'edit-button active' : 'edit-button'}
+            className={inEditMode ? 'button-left active' : 'button-left'}
             onClick={toggleEditMode}
           >
             <EditIcon />

@@ -3,9 +3,10 @@ import { FC } from 'react'
 
 // modules
 // project files
-import { useDispatch, useSelector } from '../../hooks/useRedux'
+import './index.css'
 import { addCategory } from './thunks'
 import Category from './components/Category'
+import { useDispatch, useSelector } from '../../hooks/useRedux'
 
 type Props = {}
 const Content: FC<Props> = () => {

@@ -53,7 +53,7 @@ export const getData = createAsyncThunk<
           dispatch(updateTab(tab))
         }
         if (change.type === 'removed') {
-          dispatch(deleteTab({ id }))
+          // dispatch(deleteTab({ id }))
         }
       })
     })

@@ -5,10 +5,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import titleReplacer from '../../utils/titleReplacer'
 
 // types
-import type {
-  CreateCategoryPayload,
-  DeleteCategoryPayload,
-} from '../categories/categorySlice'
 
 const initialState: Tabs = {
   order: [],
@@ -42,6 +38,10 @@ const tabSlice = createSlice({
     },
     updateActiveTab: (state, action: PayloadAction<UpdateActiveTabPayload>) => {
       state.activeTab = action.payload.index
+    },
+    updateTab: (state, action: PayloadAction<UpdateTabPayload>) => {
+      const { id, ...tab } = action.payload
+      state.list[id] = tab
     },
     updateCategoryOrder: (
       state,
@@ -78,36 +78,11 @@ const tabSlice = createSlice({
       state.list[id].title = titleReplacer(newTitle)
     },
   },
-  extraReducers: {
-    'categories/createCategory': (
-      state,
-      action: PayloadAction<CreateCategoryPayload>
-    ) => {
-      const { categoryId, tabId } = action.payload
-      state.list[tabId].categories.push(categoryId)
-    },
-    'categories/deleteCategory': (
-      state,
-      action: PayloadAction<DeleteCategoryPayload>
-    ) => {
-      const { categoryId, tabId } = action.payload
-      state.list[tabId].categories = state.list[tabId].categories.filter(
-        (id) => id !== categoryId
-      )
-    },
-  },
 })
 
 export default tabSlice.reducer
-export const {
-  createTab,
-  deleteTab,
-  dropAll,
-  updateActiveTab,
-  updateCategoryOrder,
-  updateTabOrder,
-  updateTabTitle,
-} = tabSlice.actions
+export const { createTab, deleteTab, dropAll, updateActiveTab, updateTab } =
+  tabSlice.actions
 export interface Tabs {
   order: string[]
   list: IndexedTabs
@@ -131,6 +106,9 @@ export interface DeleteTabPayload {
 }
 interface UpdateActiveTabPayload {
   index: number
+}
+interface UpdateTabPayload extends Tab {
+  id: string
 }
 interface UpdateCategoryOrderPayload {
   categoryId: string

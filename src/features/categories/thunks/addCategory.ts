@@ -3,16 +3,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { collection, addDoc } from 'firebase/firestore'
 
 // project files
+import { addTabCategory } from '../../tabs/thunks'
 import { db } from '../../../utils/firebase/firebase'
 
 // types
 import { AppDispatch, RootState } from '../../../app/store'
 
-export const addTab = createAsyncThunk<
+type Payload = { title: string; tabId: string }
+export const addCategory = createAsyncThunk<
   void,
-  string,
+  Payload,
   { dispatch: AppDispatch; state: RootState }
->('tabs/addTab', async (title, { dispatch, getState }) => {
+>('tabs/addTab', async ({ title, tabId }, { dispatch, getState }) => {
   const {
     auth: { uid },
   } = getState()
@@ -20,10 +22,12 @@ export const addTab = createAsyncThunk<
   if (!uid) return
 
   try {
-    await addDoc(collection(db, 'users', uid, 'tabs'), {
+    const doc = await addDoc(collection(db, 'users', uid, 'categories'), {
       title,
-      categories: [],
+      bookmarks: [],
     })
+
+    dispatch(addTabCategory({ id: tabId, category: doc.id }))
   } catch (error) {
     console.log('got an error: ', error)
   }

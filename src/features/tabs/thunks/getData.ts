@@ -1,13 +1,6 @@
 // modules
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  query,
-} from 'firebase/firestore'
+import { collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore'
 
 // project files
 import { db } from '../../../utils/firebase/firebase'
@@ -16,7 +9,8 @@ import { queryListeners } from '../../auth/thunks'
 
 // types
 import { AppDispatch, RootState } from '../../../app/store'
-import { createTab } from '../tabSlice'
+import { createTab, deleteTab, updateTab } from '../tabSlice'
+import { createCategory } from '../../categories/categorySlice'
 
 export const getData = createAsyncThunk<
   void,
@@ -38,25 +32,62 @@ export const getData = createAsyncThunk<
       dispatch(setDefaultData())
       return
     }
-
-    // const tabs = await getDocs(collection(db, 'users', uid, 'tabs'))
+    // define the collections
     const tabQuery = query(collection(db, 'users', uid, 'tabs'))
-    const unsubscribe = onSnapshot(tabQuery, (snapshot) => {
+    const categoryQuery = query(collection(db, 'users', uid, 'categories'))
+    const bookmarkQuery = query(collection(db, 'users', uid, 'bookmarks'))
+
+    // establish the listeners
+    const tabUnsubscribe = onSnapshot(tabQuery, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
+        const id = change.doc.id
+        const { title, categories } = change.doc.data()
+
         if (change.type === 'added') {
-          const id = change.doc.id
-          const { title, categories } = change.doc.data()
           dispatch(createTab({ id, title, categories }))
         }
         if (change.type === 'modified') {
-          console.log('Modified tab: ', change.doc.data())
+          dispatch(updateTab({ id, title, categories }))
         }
         if (change.type === 'removed') {
-          console.log('Removed tab: ', change.doc.data())
+          dispatch(deleteTab({ id }))
         }
       })
     })
-    queryListeners.push(unsubscribe)
+    const categoryUnsubscribe = onSnapshot(categoryQuery, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        const id = change.doc.id
+        const { title, bookmarks } = change.doc.data()
+
+        if (change.type === 'added') {
+          dispatch(createCategory({ id, title, bookmarks }))
+        }
+        if (change.type === 'modified') {
+        }
+        if (change.type === 'removed') {
+        }
+      })
+    })
+    const bookmarkUnsubscribe = onSnapshot(bookmarkQuery, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        const id = change.doc.id
+        const { title, bookmarks } = change.doc.data()
+
+        if (change.type === 'added') {
+        }
+        if (change.type === 'modified') {
+        }
+        if (change.type === 'removed') {
+        }
+      })
+    })
+
+    // store the listener to unsubscribe on logout
+    queryListeners.push(
+      tabUnsubscribe,
+      categoryUnsubscribe,
+      bookmarkUnsubscribe
+    )
   } catch (error) {
     console.log('got an error: ', error)
   }

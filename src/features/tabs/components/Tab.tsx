@@ -4,11 +4,11 @@ import { FC, useState } from 'react'
 // modules
 // project files
 import { useDispatch, useSelector } from '../../../hooks/useRedux'
-import { updateActiveTab, updateTabTitle } from '../tabSlice'
+import { updateActiveTab } from '../tabSlice'
 import TitleInput from '../../../components/TitleInput'
 import { deleteBookmark } from '../../bookmarks/bookmarkSlice'
 import { deleteCategory } from '../../categories/categorySlice'
-import { deleteTab } from '../tabSlice'
+import { deleteTab, updateTabTitle } from '../thunks'
 
 type Props = { id: string; inEditMode: boolean; position: number }
 const Tab: FC<Props> = ({ id, inEditMode, position }) => {
@@ -28,20 +28,24 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
     }
     dispatch(updateActiveTab({ index: position }))
   }
-  const updateTabTitleCb = (newTitle: string) => {
-    dispatch(updateTabTitle({ id, newTitle }))
+  const updateTabTitleCb = (title: string) => {
+    dispatch(updateTabTitle({ id, title }))
   }
   const handleDeleteTab = () => {
     if (activeTab === position) {
       dispatch(updateActiveTab({ index: -1 }))
     }
-    thisTab.categories.forEach((categoryId) => {
-      categories[categoryId].bookmarks.forEach((bookmarkId) => {
-        dispatch(deleteBookmark({ bookmarkId, categoryId }))
+    if (thisTab?.categories?.length > 0) {
+      thisTab.categories.forEach((categoryId) => {
+        if (categories[categoryId]?.bookmarks?.length > 0) {
+          categories[categoryId].bookmarks.forEach((bookmarkId) => {
+            dispatch(deleteBookmark({ bookmarkId, categoryId }))
+          })
+        }
+        dispatch(deleteCategory({ categoryId, tabId: id }))
       })
-      dispatch(deleteCategory({ categoryId, tabId: id }))
-    })
-    dispatch(deleteTab({ id }))
+    }
+    dispatch(deleteTab(id))
   }
 
   return (

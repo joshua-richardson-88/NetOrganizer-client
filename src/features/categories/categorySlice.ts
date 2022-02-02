@@ -1,6 +1,5 @@
 // modules
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { nanoid } from 'nanoid'
 
 // project files
 import titleReplacer from '../../utils/titleReplacer'
@@ -17,26 +16,9 @@ const categorySlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    createCategory: {
-      reducer: (state, action: PayloadAction<CreateCategoryPayload>) => {
-        const { category, categoryId } = action.payload
-        state[categoryId] = category
-      },
-      prepare: ({ newTitle, tabId }: CreateCategoryInput) => {
-        const categoryId = nanoid()
-        const title = titleReplacer(newTitle)
-
-        return {
-          payload: {
-            category: {
-              title,
-              bookmarks: [],
-            },
-            categoryId,
-            tabId,
-          },
-        }
-      },
+    createCategory: (state, action: PayloadAction<CreateCategoryPayload>) => {
+      const { id, ...category } = action.payload
+      state[id] = category
     },
     deleteCategory: (state, action: PayloadAction<DeleteCategoryPayload>) => {
       delete state[action.payload.categoryId]
@@ -107,14 +89,8 @@ export interface Category {
   title: string
   bookmarks: string[]
 }
-interface CreateCategoryInput {
-  newTitle: string
-  tabId: string
-}
-export interface CreateCategoryPayload {
-  category: Category
-  categoryId: string
-  tabId: string
+export interface CreateCategoryPayload extends Category {
+  id: string
 }
 export interface DeleteCategoryPayload {
   categoryId: string

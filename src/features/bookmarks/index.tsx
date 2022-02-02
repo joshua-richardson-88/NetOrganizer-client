@@ -27,6 +27,8 @@ const Bookmark: FC<Props> = ({ categoryId, id }) => {
   const handleDeleteClick = () =>
     dispatch(deleteBookmark({ bookmarkId: id, categoryId }))
 
+  if (!thisBookmark) return null
+
   return (
     <div
       className='row'

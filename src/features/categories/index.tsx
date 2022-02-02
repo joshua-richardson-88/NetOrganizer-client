@@ -4,16 +4,15 @@ import { FC } from 'react'
 // modules
 // project files
 import { useDispatch, useSelector } from '../../hooks/useRedux'
-import { createCategory } from './categorySlice'
+import { addCategory } from './thunks'
 import Category from './components/Category'
 
 type Props = {}
 const Content: FC<Props> = () => {
   const dispatch = useDispatch()
   const { activeTab, list, order } = useSelector((state) => state.tabs)
-  const addCategory = () => {
-    const newCategory = { newTitle: 'New Category', tabId: order[activeTab] }
-    dispatch(createCategory(newCategory))
+  const handleAddCategory = () => {
+    dispatch(addCategory({ title: 'New Category', tabId: order[activeTab] }))
   }
 
   if (activeTab < 0) return <BlankPage />
@@ -21,7 +20,7 @@ const Content: FC<Props> = () => {
   return (
     <main>
       <div className='category-list'>
-        {list[order[activeTab]].categories &&
+        {list[order[activeTab]]?.categories &&
           list[order[activeTab]].categories.map((categoryId, index) => (
             <Category
               key={categoryId}
@@ -31,7 +30,7 @@ const Content: FC<Props> = () => {
             />
           ))}
       </div>
-      <button className='fab' onClick={addCategory}>
+      <button className='fab' onClick={handleAddCategory}>
         +
       </button>
     </main>

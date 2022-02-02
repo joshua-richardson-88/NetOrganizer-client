@@ -9,6 +9,7 @@ import { db } from '../../../utils/firebase/firebase'
 import { AppDispatch, RootState } from '../../../app/store'
 import { Bookmark } from '../bookmarkSlice'
 import { addBookmarkCategory } from '../../categories/thunks/addBookmarkCategory'
+import titleReplacer from '../../../utils/titleReplacer'
 
 type Payload = { bookmark: Bookmark; categoryId: string }
 export const addBookmark = createAsyncThunk<
@@ -24,10 +25,10 @@ export const addBookmark = createAsyncThunk<
   if (!uid) return
 
   try {
-    const doc = await addDoc(
-      collection(db, 'users', uid, 'bookmarks'),
-      bookmark
-    )
+    const doc = await addDoc(collection(db, 'users', uid, 'bookmarks'), {
+      ...bookmark,
+      title: titleReplacer(bookmark.title),
+    })
     dispatch(addBookmarkCategory({ id: categoryId, bookmark: doc.id }))
   } catch (error) {
     console.log('got an error: ', error)

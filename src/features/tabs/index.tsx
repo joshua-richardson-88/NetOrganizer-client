@@ -11,6 +11,8 @@ import { ReactComponent as DotsVerticalIcon } from '../../assets/dotsVerticalIco
 import { useDispatch, useSelector } from '../../hooks/useRedux'
 import useToggle from '../../hooks/useToggle'
 import useOutsideClick from '../../hooks/useOutsideClick'
+import useMediaQuery from '../../hooks/useMediaQuery'
+import { MobileHeader } from '../../components/MobileHeader'
 
 // types
 
@@ -22,6 +24,7 @@ const Header: FC<Props> = () => {
   const menuRef = useRef(null)
   const [isEditMode, toggleEditMode] = useToggle(false)
   const [isMenuOpen, toggleMenuOpen] = useToggle(false)
+  const isSmallScreen = useMediaQuery('(max-width: 420px)')
 
   const handleMenuClick = () => toggleMenuOpen()
   const handleEditModeClick = () => {
@@ -35,6 +38,8 @@ const Header: FC<Props> = () => {
   const handleSignOut = () => dispatch(userSignOut())
 
   useOutsideClick(menuRef, () => toggleMenuOpen(false))
+
+  if (isSmallScreen) return <MobileHeader />
 
   return (
     <header>

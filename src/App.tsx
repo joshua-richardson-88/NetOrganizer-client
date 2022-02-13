@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 
 // project files
 import './App.css'
-import Header from './features/tabs'
+import Header from './components/Header'
 import Content from './features/categories'
 import { useDispatch, useSelector } from './hooks/useRedux'
 import { userSignIn } from './features/auth/thunks'

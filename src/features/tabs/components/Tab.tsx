@@ -51,7 +51,11 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
   return (
     <div
       className={
-        inEditMode ? 'edit-mode' : activeTab === position ? 'active' : ''
+        inEditMode
+          ? 'edit-mode tab'
+          : activeTab === position
+          ? 'active tab'
+          : 'tab'
       }
     >
       {editTab ? (
@@ -65,7 +69,7 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
       )}
       {inEditMode && (
         <span className='delete-tab' onClick={handleDeleteTab}>
-          x
+          X
         </span>
       )}
     </div>

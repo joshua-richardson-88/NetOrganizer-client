@@ -1,8 +1,10 @@
 main {
   width: calc(100vw - 2rem);
-  height: 100%;
+  height: calc(100vh - 2rem);
   background-color: #444;
+  margin-top: 4rem;
   padding: 1rem;
+  overflow-y: auto;
 }
 .blank-category {
   display: flex;
@@ -34,10 +36,7 @@ main .fab:hover {
 }
 
 .category-list {
-  height: calc(100vh - 2rem - 4rem);
-  display: flex;
-  flex-flow: column wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
 }

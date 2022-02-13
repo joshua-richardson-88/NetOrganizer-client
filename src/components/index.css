@@ -1,0 +1,132 @@
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  background-color: var(--background-dark-0);
+  padding: 0 1rem;
+  box-shadow: 0 1px 10px 8px hsla(0, 0%, 0%, 0.6);
+}
+
+.menu-container {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background-color: var(--background-dark-0);
+}
+.menu-title-small {
+  color: var(--text-dark-1);
+  text-align: center;
+  width: calc(100vw - 2rem);
+  margin: 0;
+  padding: 0;
+}
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--background-dark-0);
+  z-index: 400;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.drawer .top-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+.drawer .tab-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+.drawer button {
+  font-size: 1.2em;
+}
+.drawer .menu-links {
+  display: flex;
+  flex: 1;
+  background-color: var(--background-dark-3);
+  margin: 0;
+  padding: 1rem;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+.tab {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tab:hover {
+  background-color: var(--background-dark-3a);
+}
+.tab.edit-mode {
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+.tab.active {
+  background-color: hsla(207, 39%, 53%, 0.3);
+}
+.tab h2 {
+  margin: 0;
+  color: var(--text-dark-1);
+  user-select: none;
+  cursor: pointer;
+}
+.tab span {
+  color: var(--text-dark-1);
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+.tablist {
+  display: flex;
+  flex: 1;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  margin-left: 4rem;
+}
+.tablist > div {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  color: var(--text-dark-1);
+  gap: 0.5rem;
+  width: max-content;
+}
+.tablist > div.edit-mode {
+  padding: 0 0.25rem;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+.tablist > div > h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark-1);
+  user-select: none;
+  cursor: pointer;
+}
+.tablist > div > h2:hover {
+  color: var(--text-dark-2);
+}
+.tablist > div.active {
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--primary-dark);
+}
+.tablist > div > h2.edit-mode:hover,
+.tablist > div > h2.edit-mode.active:hover {
+  color: var(--text-dark-3);
+}
+.tablist > div > .delete-tab {
+  cursor: pointer;
+  user-select: none;
+}

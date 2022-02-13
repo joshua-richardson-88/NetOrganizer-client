@@ -1,11 +1,6 @@
 .card {
-  min-width: calc((100vw - 4rem) / 5);
-  width: max-content;
-  max-width: calc((100vw - 4rem));
-  min-height: 7rem;
-  max-height: 85vh;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column;
   background-color: hsla(0, 0%, 100%, 0.05);
   border-radius: 0.5rem;
 }

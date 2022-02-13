@@ -19,7 +19,7 @@ const Bookmark: FC<Props> = ({ categoryId, id }) => {
   const dispatch = useDispatch()
   const { [id]: thisBookmark } = useSelector((state) => state.bookmarks)
 
-  const [hovered, setHovered] = useState(true)
+  const [hovered, setHovered] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
 
   const handleMouseOver = () => setHovered(true)

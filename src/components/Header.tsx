@@ -8,7 +8,7 @@ import { MobileHeader } from './MobileHeader'
 import DesktopHeader from './TabletHeader'
 
 const Header = () => {
-  const isSmallScreen = useMediaQuery('(max-width: 420px)')
+  const isSmallScreen = useMediaQuery('(max-width: 425px)')
 
   if (isSmallScreen) return <MobileHeader />
   return <DesktopHeader />

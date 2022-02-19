@@ -45,7 +45,7 @@ header {
 }
 @media screen and (min-width: 768px) {
   .drawer {
-    width: 30vw;
+    width: 350px;
     box-shadow: 2px 0 10px 5px hsla(0, 0%, 0%, 0.3);
   }
 }

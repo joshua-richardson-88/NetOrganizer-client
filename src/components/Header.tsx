@@ -1,17 +1,27 @@
 // react
 // modules
 // project files
-import useMediaQuery from '../hooks/useMediaQuery'
-import { MobileHeader } from './MobileHeader'
-import DesktopHeader from './TabletHeader'
+import { ReactComponent as DotsVerticalIcon } from '../assets/dotsVerticalIcon.svg'
+import useToggle from '../hooks/useToggle'
+import DrawerPortal from './DrawerPortal'
+import './index.css'
 
 // types
+import type { FC } from 'react'
 
-const Header = () => {
-  const isSmallScreen = useMediaQuery('(max-width: 425px)')
+const Header: FC = () => {
+  const [isMenuOpen, setMenuOpen] = useToggle(false)
 
-  if (isSmallScreen) return <MobileHeader />
-  return <DesktopHeader />
+  const handleMenuClick = () => setMenuOpen()
+
+  return (
+    <header>
+      <button className='menu-button' onClick={handleMenuClick}>
+        <DotsVerticalIcon />
+      </button>
+      <h2 className='menu-title-small'>NetOrganizer</h2>
+      <DrawerPortal isOpen={isMenuOpen} onClose={setMenuOpen} />
+    </header>
+  )
 }
-
 export default Header

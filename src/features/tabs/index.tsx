@@ -1,69 +1,79 @@
 // react
-import { FC, useRef } from 'react'
+import { FC, useState } from 'react'
 
 // modules
 // project files
-import './index.css'
-import { addTab } from './thunks'
-import Tab from './components/Tab'
-import { userSignOut } from '../auth/thunks'
-import { ReactComponent as DotsVerticalIcon } from '../../assets/dotsVerticalIcon.svg'
 import { useDispatch, useSelector } from '../../hooks/useRedux'
-import useToggle from '../../hooks/useToggle'
-import useOutsideClick from '../../hooks/useOutsideClick'
-import useMediaQuery from '../../hooks/useMediaQuery'
-import { MobileHeader } from '../../components/MobileHeader'
+import { updateActiveTab } from './tabSlice'
+import TitleInput from '../../components/TitleInput'
+import { deleteBookmark } from '../bookmarks/thunks'
+import { deleteCategory } from '../categories/thunks'
+import { deleteTab, updateTabTitle } from './thunks'
 
-// types
-
-type Props = {}
-const Header: FC<Props> = () => {
+type Props = { id: string; inEditMode: boolean; position: number }
+const Tab: FC<Props> = ({ id, inEditMode, position }) => {
   const dispatch = useDispatch()
-  const { order } = useSelector((state) => state.tabs)
+  const {
+    activeTab,
+    list: { [id]: thisTab },
+  } = useSelector((state) => state.tabs)
+  const categories = useSelector((state) => state.categories)
 
-  const menuRef = useRef(null)
-  const [isEditMode, toggleEditMode] = useToggle(false)
-  const [isMenuOpen, toggleMenuOpen] = useToggle(false)
-  const isSmallScreen = useMediaQuery('(max-width: 420px)')
+  const [editTab, setEditTab] = useState(false)
 
-  const handleMenuClick = () => toggleMenuOpen()
-  const handleEditModeClick = () => {
-    toggleEditMode()
-    toggleMenuOpen()
+  const handleClick = () => {
+    if (inEditMode) {
+      setEditTab((prev) => !prev)
+      return
+    }
+    dispatch(updateActiveTab({ index: position }))
   }
-  const addNewTab = () => {
-    dispatch(addTab('New Tab'))
-    toggleMenuOpen()
+  const updateTabTitleCb = (title: string) => {
+    dispatch(updateTabTitle({ id, title }))
   }
-  const handleSignOut = () => dispatch(userSignOut())
-
-  useOutsideClick(menuRef, () => toggleMenuOpen(false))
-
-  if (isSmallScreen) return <MobileHeader />
+  const handleDeleteTab = () => {
+    if (activeTab === position) {
+      dispatch(updateActiveTab({ index: -1 }))
+    }
+    if (thisTab?.categories?.length > 0) {
+      thisTab.categories.forEach((categoryId) => {
+        if (categories[categoryId]?.bookmarks?.length > 0) {
+          categories[categoryId].bookmarks.forEach((bookmarkId) => {
+            dispatch(deleteBookmark({ bookmarkId, categoryId }))
+          })
+        }
+        dispatch(deleteCategory({ categoryId, tabId: id }))
+      })
+    }
+    dispatch(deleteTab(id))
+  }
 
   return (
-    <header>
-      <div className='menu-container' ref={menuRef}>
-        <button className='menu-button' onClick={handleMenuClick}>
-          <DotsVerticalIcon />
-        </button>
-        {isMenuOpen && (
-          <ul className='menu-links'>
-            <li onClick={addNewTab}>Add A Tab</li>
-            <li onClick={handleEditModeClick}>
-              {isEditMode ? 'Done Editing' : 'Edit Tabs'}
-            </li>
-            <li onClick={handleSignOut}>Sign Out</li>
-          </ul>
-        )}
-      </div>
-      <div className='tablist'>
-        {order.map((id, index) => (
-          <Tab key={id} id={id} position={index} inEditMode={isEditMode} />
-        ))}
-      </div>
-    </header>
+    <div
+      className={
+        inEditMode
+          ? 'edit-mode tab'
+          : activeTab === position
+          ? 'active tab'
+          : 'tab'
+      }
+    >
+      {editTab ? (
+        <TitleInput
+          title={thisTab.title}
+          setIsEditing={setEditTab}
+          updateCb={updateTabTitleCb}
+        />
+      ) : (
+        <h2 onClick={handleClick}>{thisTab.title}</h2>
+      )}
+      {inEditMode && (
+        <span className='delete-tab' onClick={handleDeleteTab}>
+          X
+        </span>
+      )}
+    </div>
   )
 }
 
-export default Header
+export default Tab

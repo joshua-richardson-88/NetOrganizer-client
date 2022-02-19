@@ -3,7 +3,7 @@
 // project files
 import { useDispatch, useSelector } from '../hooks/useRedux'
 import useToggle from '../hooks/useToggle'
-import Tab from '../features/tabs/components/Tab'
+import Tab from '../features/tabs'
 import { addTab } from '../features/tabs/thunks'
 import { userSignOut } from '../features/auth/thunks'
 

@@ -87,7 +87,6 @@ export const getData = createAsyncThunk<
     const bookmarkUnsubscribe = onSnapshot(bookmarkQuery, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         const id = change.doc.id
-        console.log(change.doc.data())
         const bookmark = change.doc.data() as Bookmark
 
         if (change.type === 'added') {

@@ -19,7 +19,7 @@ function App() {
   const handleSignIn = () => dispatch(userSignIn())
 
   useEffect(() => {
-    if (uid && order.length === 0) dispatch(getData())
+    if (uid) dispatch(getData())
   }, [dispatch, order, uid])
 
   if (!uid)

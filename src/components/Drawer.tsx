@@ -1,4 +1,5 @@
 // react
+import { useRef } from 'react'
 // modules
 // project files
 import { useDispatch, useSelector } from '../hooks/useRedux'
@@ -9,9 +10,11 @@ import { userSignOut } from '../features/auth/thunks'
 
 // types
 import type { FC } from 'react'
+import useOutsideClick from '../hooks/useOutsideClick'
 
 type Props = { closeMenu: (state: boolean) => void }
 const Drawer: FC<Props> = ({ closeMenu }) => {
+  const drawerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
   const { order } = useSelector((state) => state.tabs)
 
@@ -22,8 +25,10 @@ const Drawer: FC<Props> = ({ closeMenu }) => {
   const handleEdit = () => setEditMode()
   const handleLogout = () => dispatch(userSignOut())
 
+  useOutsideClick(drawerRef, () => closeMenu(false))
+
   return (
-    <div className='drawer'>
+    <div className='drawer' ref={drawerRef}>
       <div className='top-row'>
         <button onClick={handleMenuClick}>X</button>
       </div>

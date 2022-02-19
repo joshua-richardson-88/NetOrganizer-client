@@ -57,6 +57,7 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
           ? 'active tab'
           : 'tab'
       }
+      onClick={handleClick}
     >
       {editTab ? (
         <TitleInput
@@ -65,7 +66,7 @@ const Tab: FC<Props> = ({ id, inEditMode, position }) => {
           updateCb={updateTabTitleCb}
         />
       ) : (
-        <h2 onClick={handleClick}>{thisTab.title}</h2>
+        <h2>{thisTab.title}</h2>
       )}
       {inEditMode && (
         <span className='delete-tab' onClick={handleDeleteTab}>

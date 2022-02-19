@@ -39,6 +39,7 @@ main .fab:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  min-height: 100%;
 }
 
 /* Large-Phone */

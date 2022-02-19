@@ -1,11 +1,11 @@
 // react
 // modules
 // project files
-// types
-
 import useMediaQuery from '../hooks/useMediaQuery'
 import { MobileHeader } from './MobileHeader'
 import DesktopHeader from './TabletHeader'
+
+// types
 
 const Header = () => {
   const isSmallScreen = useMediaQuery('(max-width: 425px)')

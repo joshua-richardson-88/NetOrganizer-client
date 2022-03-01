@@ -14,21 +14,22 @@ main {
   height: 100%;
 }
 main .fab {
-  cursor: pointer;
   position: absolute;
   bottom: 2rem;
-  right: 2rem;
+  right: 3rem;
   z-index: 100;
   height: 3rem;
   width: 3rem;
-  border: 4px solid hsl(207, 39%, 53%);
+  cursor: pointer;
+  user-select: none;
+  border: none;
   border-radius: 50%;
-  background: inherit;
+  background: linear-gradient(145deg, #3d3d3d, #494949);
+  box-shadow: 3px 3px 7px #1b1b1b, -3px -3px 7px #656565;
   color: hsl(207, 39%, 53%);
   font-size: x-large;
   font-weight: 300;
   transition: 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  user-select: none;
 }
 main .fab:hover {
   background-color: hsl(207, 39%, 53%);
@@ -38,7 +39,7 @@ main .fab:hover {
 .category-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 2rem;
   min-height: 100%;
 }
 
@@ -46,29 +47,45 @@ main .fab:hover {
 @media screen and (min-width: 550px) {
   .category-list {
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(10vh, 43vh);
   }
-}
-
-/* Tablet */
-@media screen and (min-width: 768px) {
-  .category-list {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(10vh, 50%);
+  .category-list .card {
+    background: linear-gradient(145deg, #3d3d3d, #494949);
+    box-shadow: 3px 3px 7px #232323, -3px -3px 7px #656565;
   }
 }
 
 /* Small Desktop */
 @media screen and (min-width: 1024px) {
   .category-list {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(10vh, 50%);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(10vh, 43vh);
+  }
+  .category-list .card {
+    background: linear-gradient(145deg, #3d3d3d, #494949);
+    box-shadow: 3px 3px 7px #232323, -3px -3px 7px #656565;
   }
 }
 
 /* Large Desktop */
 @media screen and (min-width: 1440px) {
   .category-list {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(10vh, 43vh);
+  }
+  .category-list .card {
+    background: linear-gradient(145deg, #3d3d3d, #494949);
+    box-shadow: 3px 3px 7px #232323, -3px -3px 7px #656565;
+  }
+}
+/* Super Large Desktop */
+@media screen and (min-width: 1800px) {
+  .category-list {
     grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: minmax(10vh, 50%);
+    grid-auto-rows: minmax(10vh, 43vh);
+  }
+  .category-list .card {
+    background: linear-gradient(145deg, #3d3d3d, #494949);
+    box-shadow: 3px 3px 7px #232323, -3px -3px 7px #656565;
   }
 }
